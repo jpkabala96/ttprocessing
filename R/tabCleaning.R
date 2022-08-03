@@ -1,0 +1,75 @@
+#
+
+
+tabCleaning <- function(){
+  tab <- shiny::tabPanel("Cleaning",
+                         shiny::sidebarLayout(
+                           sidebarPanel = shiny::sidebarPanel(shiny::actionButton("pulisci", "pulisci i dati"),
+                                                              shiny::uiOutput("selectids"),
+                                                              shiny::dateInput("datasetstartdate",
+                                                                               label = "Start Date",
+                                                                               value = "2020-01-01"),
+                                                              shiny::dateInput("datasetenddate",
+                                                                               label = "End Date",
+                                                                               value = Sys.Date()),
+                                                              shiny::numericInput("l.TTree",
+                                                                                  label = "Min T inside the tree accepted",
+                                                                                  min = -100,
+                                                                                  max = 60,
+                                                                                  step = 1,
+                                                                                  value = -10),
+                                                              shiny::numericInput("h.TTree",
+                                                                                  label = "Max T inside the tree accepted",
+                                                                                  min = 10,
+                                                                                  max = 60,
+                                                                                  step = 1,
+                                                                                  value = 40),
+                                                              shiny::numericInput("l.Tair",
+                                                                                  label = "Min T air accepted",
+                                                                                  min = -100,
+                                                                                  max = 70,
+                                                                                  step = 1,
+                                                                                  value = -15),
+                                                              shiny::numericInput("h.Tair",
+                                                                                  label = "Max T air accepted",
+                                                                                  min = 0,
+                                                                                  max = 70,
+                                                                                  step = 1,
+                                                                                  value = 55),
+                                                              shiny::numericInput("l.sap",
+                                                                                  label = "Min Sap flow accepted",
+                                                                                  min = -20,
+                                                                                  max = 50,
+                                                                                  step = 1,
+                                                                                  value = 0),
+                                                              shiny::numericInput("h.sap",
+                                                                                  label = "Max Sap flow accepted",
+                                                                                  min = 0,
+                                                                                  max = 10000,
+                                                                                  step = 1,
+                                                                                  value = 1000),
+                                                              shiny::numericInput("l.RH",
+                                                                                  label = "Min RH value accepted",
+                                                                                  min = 0,
+                                                                                  max = 100,
+                                                                                  step = 1,
+                                                                                  value = 35),
+                                                              shiny::numericInput("h.RH",
+                                                                                  label = "Max RH value accepted",
+                                                                                  min = 0,
+                                                                                  max = 100,
+                                                                                  step = 1,
+                                                                                  value = 100),
+                                                              shiny::textInput("data_name", "Dataset name"),
+                                                              shiny::downloadButton("clean_data", label = "Download clean data"),
+                                                              width = 3
+                           ),
+                           mainPanel = shiny::verticalLayout(shiny::uiOutput("hoursselection"),
+                                                             
+                                                             shiny::dataTableOutput("data4d"))
+                           
+                           
+                         )
+  )
+  return(tab)
+}
