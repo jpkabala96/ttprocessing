@@ -41,7 +41,9 @@ launchGUI <- function(){
   #user interface
   ui <- shiny::fluidPage(
     theme = shinythemes::shinytheme(theme = "cyborg"),
-    shiny::titlePanel("TreeTalker data processing"),
+    ###mette logo
+    shiny::titlePanel(shiny::div("TreeTalker data processing", shiny::img(src = "C:/Users/casa/Desktop/DottoratoCaserta/PacchettoPerPubblicazione/Logo3.jpeg", height = 100, width = 100)),
+                      windowTitle = "TT+ data processing"),
     shiny::tabsetPanel(
       shiny::tabPanel("Loading",
                       shiny::sidebarLayout(
@@ -64,9 +66,11 @@ launchGUI <- function(){
 
                           shiny::textInput("raw_data_name", "Dataset name"),
 
-                          shiny::downloadButton("raw_data", label = "Download raw data")
+                          shiny::downloadButton("raw_data", label = "Download raw data"),
+                          shiny::imageOutput("myImage")
                         ),
                         shiny::mainPanel(shiny::dataTableOutput("dati"))
+                        
                       )
 
       ),
@@ -322,7 +326,7 @@ launchGUI <- function(){
                                               step = 0.1),
                           shiny::textInput("outputQName",
                                            label  = "Plot filename"),
-                          shiny::downloadButton("downloadQPlot",
+                          shiny::downloadButton("downloadQplot",
                                                 label = "Download plot"),
                           width = 3
                         ),
@@ -547,6 +551,15 @@ launchGUI <- function(){
   )
 
   server <- function(input, output){
+    output$myImage <- renderImage({
+      # Return a list containing the filename
+      list(src = "C:/Users/casa/Desktop/DottoratoCaserta/PacchettoPerPubblicazione/Logo3.jpeg",
+           contentType = 'image/jpeg',
+           width = 400,
+           height = 300,
+           alt = "This is alternate text")
+    }, deleteFile = F)
+  
     #DataSource <- eventReactive(input$carica, url(input$LinkServer))
     dati1 <- shiny::eventReactive(input$carica,
                                   {readTTData(input$LinkServer1)})

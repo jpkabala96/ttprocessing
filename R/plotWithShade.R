@@ -8,6 +8,8 @@
 #' a variant of the plotTS function)
 #' @param statistic The summary arg. Must be one of "mean" or "median".
 #'   The default is "median".
+#' @param lat Latitude at which is located the study site (in degrees).
+#' @param lon Longitude at which is located the study site (in degrees).
 #' @export
 #'
 
@@ -19,17 +21,19 @@ plotWithShade<-  function(data,
 
   sun <- suncalc::getSunlightTimes(data$date,
                                    lat = lat,
-                                   lon = lon)
+                                   lon = lon) %>%
+    dplyr::distinct()
+  
   plt <- plotTS(data = data, variable = variable, statistic = statistic) +
     ggplot2::geom_rect(data = sun, ggplot2::aes(xmin = as.POSIXct(.data$date),
                                                 xmax = .data$sunrise,
                                                 ymin = -Inf,
                                                 ymax = Inf),
-                       fill = "#22222201") +
+                       fill = "#222222", alpha = 0.5) +
     ggplot2::geom_rect(data = sun, ggplot2::aes(xmin = .data$sunset,
                                                 xmax = as.POSIXct(.data$date + as.difftime(1, units = "days")),
                                                 ymin = -Inf,
                                                 ymax = Inf),
-                       fill = "#22222201")
+                       fill = "#222222", alpha = 0.5)
   return(plt)
 }

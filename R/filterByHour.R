@@ -7,7 +7,7 @@
 #'
 #'
 #'
-filterByHour <- function(data, hours){
-  output <- data %>% dplyr::filter(f_hour %in% hours)
+filterByHour <- function(data4D, hours){
+  output <- data4D %>% dplyr::filter(f_hour %in% hours)
   return(output)
 }

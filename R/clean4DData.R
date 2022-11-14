@@ -5,6 +5,62 @@
 #'   TT+ manual. The data are also cleaned, removing values that are regarded
 #'   not to be plausible (e.g. temperatures that are too high, too low etc.) by
 #'   calling the helper functions.
+#'   It returns a data.frame, that, besides columns containing information about
+#'   the device ID and time of measurment, contains the following variables:
+#'   \code{do_sap_flow} Sap flux density calculated with the equation by Do et al.
+#'   (2011). It is expressed as l/(m^2*h).
+#'   \code{sap_flow_one_probe} Sap flux density calculated with the equation by 
+#'   Do et al. (2011), by using only one probe (the heating one). It is 
+#'   expressed as l/(m^2*h).
+#'   \code{asgharinia_sap_flow} Sap flux density calculated with the equation provided in 
+#'   Asgharinia et al. (2022). It is expressed as l/(m^2*h).
+#'   \code{Tair} Air temperature in Celsius degrees. 
+#'   \code{Tref0} Temperature of the reference probe at time 0 in Celsius degrees.
+#'   \code{Tref1} Temperature of the reference probe at time 1 in Celsius degrees.
+#'   \code{Theat0} Temperature of the heating probe at time 0 in Celsius degrees.
+#'   \code{Theat1} Temperature of the heating probe at time 0 in Celsius degrees.
+#'   \code{RH} Relative humidity as %.
+#' @param data Tree talker data, read with the \code{readTTData} function of the package.
+#' @param lower.TTree Lower threshold of temperature inside the trunk. 
+#'    Values lower than this will be regarded as non valid and replaced with NA.
+#'    Default value = \code{0}.
+#' @param higher.TTree Higher threshold of temperature inside the trunk. 
+#'    Values higher than this will be regarded as non valid and replaced with NA.
+#'    Default value = \code{40}.
+#' @param lower.TAir Lower threshold of air temperature regarded as valid. 
+#'    Values lower than this will be regarded as non valid and replaced with NA.
+#'    Default value = \code{-15}.
+#' @param higher.TAir Higher threshold of air temperature regarded as valid. 
+#'    Values higher than this will be regarded as non valid and replaced with NA.
+#'    Default value = \code{50}.
+#' @param lower.RH Lower threshold of Relative Humidity (%) regarded as valid. 
+#'    Values lower than this will be regarded as non valid and replaced with NA.
+#'    Default value = \code{35}. 
+#' @param higher.RH Higher threshold of Relative Humidity (%) regarded as valid. 
+#'    Values higher than this will be regarded as non valid and replaced with NA.
+#'    Default value = \code{100}
+#' @param lower.sap.flow Lower threshold of sap flow. Values lower than this will 
+#'    be replaced with NA. Default value = \code{0}.
+#' @param higher.sap.flow Higher threshold of sap flow. Values higher than this will be 
+#' considered invalid and replaced with NA. Default value = \code{1080}.
+#' @param lower.VWC Lower threshold for volumetric water content. Values lower than
+#'   this will be considered as non valid and replaced with NA. Default value = 
+#'   \code{0}.
+#' @param higher.VWC Higher threshold for volumetric water content. Values higher 
+#'   than this will be considered as non valid and replaced with NA. 
+#'   Default value = \code{100}.
+#' @param species Species the TT+ are installed on. Needed to retrieve the 
+#'   species specific coefficient for Stem Water Content estimation. 
+#'   Possible values are \code{"FagusS"} and \code{"FagusN"}, with \code{"fagusS"}
+#'   as default value. As more calibrations become available they will be added.
+#' @return A data frame with TT+ 4D data: air temperature, relative humidity, vpd, 
+#'   temperatures of the sap flow probes, K index, sap flux estimated with the 
+#'   Do et al. (2011) equation, for two and one probe, sap flux estimated with the 
+#'   equation in Asgharinia et al. (2022), growth raw data (DN), stem Water content
+#'   sensor raw values and values calculated using the species specific calibration 
+#'   equations. 
+#' @references Do, F.C.; Isarangkool Na Ayutthaya, S.; Rocheteau, A. Transient thermal dissipation method for xylem sap flow measurement: Implementation with a single probe. Tree Physiol. 2011, 31, 369– 380, doi:10.1093/treephys/tpr020.
+#'   Asgharinia, S., Leberecht, M., Belelli Marchesini, L., Friess, N., Gianelle, D., Nauss, T., ... & Valentini, R. (2022). Towards Continuous Stem Water Content and Sap Flux Density Monitoring: IoT-Based Solution for Detecting Changes in Stem Water Dynamics. Forests, 13(7), 1040.
 #' @export
 
 clean4DData <- function(data,
@@ -171,6 +227,7 @@ clean4DData <- function(data,
   #   cleanSapFlow(lower.sap.flow = lower.sap.flow, higher.sap.flow = higher.sap.flow)
   clean_data$K1 <- ((clean_data$DT_max24h / clean_data$DT) -1)
   clean_data$K1 <- ifelse(clean_data$K1 < 0, 0, clean_data$K1)
+  #Sap flow according to Do et al. 2011
   clean_data$do_sap_flow <- 12.95 * clean_data$K1 * 100 #calculate the sap flow using the old formula
   #clean the values obtained
   clean_data$do_sap_flow <- cleanSapFlow(clean_data$do_sap_flow,
@@ -179,12 +236,17 @@ clean4DData <- function(data,
   #one probe sap
   clean_data$K1_op <- ((clean_data$DT_max24h_op/clean_data$DT_oneprobe)-1)
   clean_data$K1_op <- ifelse(clean_data$K1_op < 0, 0, clean_data$K1_op)
-  clean_data$sap_flow_one_probe <- 4.79 * clean_data$K1_op * 100
+  #Sap flow according to Do et al. 2011 
+  #using only one probe
+  clean_data$sap_flow_one_probe <- 12.95 * clean_data$K1_op * 100
   #clean the values obtained
   clean_data$sap_flow_one_probe <- cleanSapFlow(clean_data$sap_flow_one_probe,
                                                 lower.sap.flow = lower.sap.flow,
                                                 higher.sap.flow = higher.sap.flow)
-
+  #Sap flow according to Asgharinia et al. 2022
+  clean_data$asgharinia_sap_flow <- 100 * ((11.3*clean_data$K1/(1-clean_data$K1))^0.77)
+  #implement the cleaning after studying it
+  
   #calculate vapour pressure deficit
   clean_data$vpd <- VPD(clean_data$Tair, clean_data$RH)
   print("cleaning done")
@@ -218,7 +280,7 @@ clean4DData <- function(data,
   clean_data$VWC <- cleanSTWC(clean_data$VWC,
                               lower.VWC = lower.VWC,
                               higher.VWC = higher.VWC)
-
+  clean_data$SWC_fagus <- 93 - (0.23* clean_data$Tref0)  - 0.0021*clean_data$Ecf_Hz
 
   #create time variables and factors
 

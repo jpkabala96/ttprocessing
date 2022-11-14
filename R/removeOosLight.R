@@ -6,6 +6,6 @@
 
 removeOosLight <- function(x){
   #remove values greater than 70 000 as they are out of scale
-  x[x>70000]<- NA
+  x[x>65000]<- NA
   return(x)
 }
