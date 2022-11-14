@@ -39,10 +39,13 @@ plotWithShade               Plot shaded Timeseries
 readTTData                  Read TreeTalkers data from server
 removeOosLight              Remove invalid light values
 scatterplot                 Scatterplot of the TT variables
+spectralPlot                TT+ spectral plot
+spectralPlotEnsemble        TT+ spectral plot
+spectralPlotHour            Spectral hourly plot
 stemMoistureIndex           Stem Moisture content
 string49Handling            Function for cleaning string 49 data
 tabLoading                  Create the UI loading Tab
-ttprocessing                ttprocessing: a package for Tree Talkers data processing
-                            and plotting
+ttprocessing                ttprocessing: a package for Tree Talkers data
+                            processing and plotting
 tzConvert                   tzConvert converts the time to local time
 VPD                         Vapour Pressure Deficit

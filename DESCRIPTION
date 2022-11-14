@@ -20,6 +20,7 @@ Imports:
     lubridate,
     magrittr,
     meltr,
+    naniar,
     rlang,
     shiny,
     shinythemes,
@@ -27,4 +28,6 @@ Imports:
     stringr,
     suncalc,
     tidyr,
-    utils
+    tidyselect,
+    utils,
+    ggpubr
