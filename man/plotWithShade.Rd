@@ -20,6 +20,10 @@ a variant of the plotTS function)}
 
 \item{statistic}{The summary arg. Must be one of "mean" or "median".
 The default is "median".}
+
+\item{lat}{Latitude at which is located the study site (in degrees).}
+
+\item{lon}{Longitude at which is located the study site (in degrees).}
 }
 \description{
 Plots the timeseries of TT+ data with nights shaded, by using

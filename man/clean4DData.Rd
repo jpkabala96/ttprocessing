@@ -19,6 +19,60 @@ clean4DData(
   species = "FagusS"
 )
 }
+\arguments{
+\item{data}{Tree talker data, read with the \code{readTTData} function of the package.}
+
+\item{lower.TTree}{Lower threshold of temperature inside the trunk. 
+Values lower than this will be regarded as non valid and replaced with NA.
+Default value = \code{0}.}
+
+\item{higher.TTree}{Higher threshold of temperature inside the trunk. 
+Values higher than this will be regarded as non valid and replaced with NA.
+Default value = \code{40}.}
+
+\item{lower.TAir}{Lower threshold of air temperature regarded as valid. 
+Values lower than this will be regarded as non valid and replaced with NA.
+Default value = \code{-15}.}
+
+\item{higher.TAir}{Higher threshold of air temperature regarded as valid. 
+Values higher than this will be regarded as non valid and replaced with NA.
+Default value = \code{50}.}
+
+\item{lower.RH}{Lower threshold of Relative Humidity (%) regarded as valid. 
+Values lower than this will be regarded as non valid and replaced with NA.
+Default value = \code{35}.}
+
+\item{higher.RH}{Higher threshold of Relative Humidity (%) regarded as valid. 
+Values higher than this will be regarded as non valid and replaced with NA.
+Default value = \code{100}}
+
+\item{lower.sap.flow}{Lower threshold of sap flow. Values lower than this will 
+be replaced with NA. Default value = \code{0}.}
+
+\item{higher.sap.flow}{Higher threshold of sap flow. Values higher than this will be 
+considered invalid and replaced with NA. Default value = \code{1080}.}
+
+\item{lower.VWC}{Lower threshold for volumetric water content. Values lower than
+this will be considered as non valid and replaced with NA. Default value = 
+\code{0}.}
+
+\item{higher.VWC}{Higher threshold for volumetric water content. Values higher 
+than this will be considered as non valid and replaced with NA. 
+Default value = \code{100}.}
+
+\item{species}{Species the TT+ are installed on. Needed to retrieve the 
+species specific coefficient for Stem Water Content estimation. 
+Possible values are \code{"FagusS"} and \code{"FagusN"}, with \code{"fagusS"}
+as default value. As more calibrations become available they will be added.}
+}
+\value{
+A data frame with TT+ 4D data: air temperature, relative humidity, vpd, 
+  temperatures of the sap flow probes, K index, sap flux estimated with the 
+  Do et al. (2011) equation, for two and one probe, sap flux estimated with the 
+  equation in Asgharinia et al. (2022), growth raw data (DN), stem Water content
+  sensor raw values and values calculated using the species specific calibration 
+  equations.
+}
 \description{
 This is the main function in this package. Its purpose is to
   filter and convert the 4D data from the TT+ raw data downloaded from the server
@@ -26,4 +80,23 @@ This is the main function in this package. Its purpose is to
   TT+ manual. The data are also cleaned, removing values that are regarded
   not to be plausible (e.g. temperatures that are too high, too low etc.) by
   calling the helper functions.
+  It returns a data.frame, that, besides columns containing information about
+  the device ID and time of measurment, contains the following variables:
+  \code{do_sap_flow} Sap flux density calculated with the equation by Do et al.
+  (2011). It is expressed as l/(m^2*h).
+  \code{sap_flow_one_probe} Sap flux density calculated with the equation by 
+  Do et al. (2011), by using only one probe (the heating one). It is 
+  expressed as l/(m^2*h).
+  \code{asgharinia_sap_flow} Sap flux density calculated with the equation provided in 
+  Asgharinia et al. (2022). It is expressed as l/(m^2*h).
+  \code{Tair} Air temperature in Celsius degrees. 
+  \code{Tref0} Temperature of the reference probe at time 0 in Celsius degrees.
+  \code{Tref1} Temperature of the reference probe at time 1 in Celsius degrees.
+  \code{Theat0} Temperature of the heating probe at time 0 in Celsius degrees.
+  \code{Theat1} Temperature of the heating probe at time 0 in Celsius degrees.
+  \code{RH} Relative humidity as %.
+}
+\references{
+Do, F.C.; Isarangkool Na Ayutthaya, S.; Rocheteau, A. Transient thermal dissipation method for xylem sap flow measurement: Implementation with a single probe. Tree Physiol. 2011, 31, 369– 380, doi:10.1093/treephys/tpr020.
+  Asgharinia, S., Leberecht, M., Belelli Marchesini, L., Friess, N., Gianelle, D., Nauss, T., ... & Valentini, R. (2022). Towards Continuous Stem Water Content and Sap Flux Density Monitoring: IoT-Based Solution for Detecting Changes in Stem Water Dynamics. Forests, 13(7), 1040.
 }

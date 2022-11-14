@@ -4,7 +4,11 @@
 \alias{dailyQualityCheck}
 \title{Data quality check}
 \usage{
-dailyQualityCheck(dati)
+dailyQualityCheck(TTdata4d)
+}
+\arguments{
+\item{TTdata4d}{Dataframe with Tree talker 4D data, such as the one produced
+by \code{clean4DData}.}
 }
 \description{
 Checks the data quality by counting the number of daily

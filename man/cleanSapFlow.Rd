@@ -9,9 +9,9 @@ cleanSapFlow(sap_flow, lower.sap.flow = 0, higher.sap.flow = 300)
 \arguments{
 \item{sap_flow}{A numeric vector with the converted sap flow data}
 
-\item{lower}{The lowest value accepted (defaults to 0)}
+\item{lower.sap.flow}{The lowest value accepted (defaults to 0)}
 
-\item{upper}{The highest value accepted (defaults to 300)}
+\item{higher.sap.flow}{The highest value accepted (defaults to 300)}
 }
 \value{
 A numeric vector with the invalid values replaced by NA's

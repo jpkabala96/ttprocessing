@@ -4,13 +4,13 @@
 \alias{filterByHour}
 \title{Filter by hour}
 \usage{
-filterByHour(data, hours)
+filterByHour(data4D, hours)
 }
 \arguments{
+\item{data4D}{The 4D TT+ data}
+
 \item{hours}{A character vectors of the hours to be included: e.g.:
 c("2","3","4") or "12".}
-
-\item{data4D}{The 4D TT+ data}
 }
 \description{
 filter that allows the user to filter the TT data by hour.
