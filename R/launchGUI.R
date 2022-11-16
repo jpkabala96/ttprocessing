@@ -66,8 +66,8 @@ launchGUI <- function(){
 
                           shiny::textInput("raw_data_name", "Dataset name"),
 
-                          shiny::downloadButton("raw_data", label = "Download raw data"),
-                          shiny::imageOutput("myImage")
+                          shiny::downloadButton("raw_data", label = "Download raw data")#,
+                          #shiny::imageOutput("myImage")
                         ),
                         shiny::mainPanel(shiny::dataTableOutput("dati"))
                         
@@ -551,14 +551,14 @@ launchGUI <- function(){
   )
 
   server <- function(input, output){
-    output$myImage <- renderImage({
-      # Return a list containing the filename
-      list(src = "C:/Users/casa/Desktop/DottoratoCaserta/PacchettoPerPubblicazione/Logo3.jpeg",
-           contentType = 'image/jpeg',
-           width = 400,
-           height = 300,
-           alt = "This is alternate text")
-    }, deleteFile = F)
+    #output$myImage <- renderImage({
+    #  # Return a list containing the filename
+    #  list(src = "C:/Users/casa/Desktop/DottoratoCaserta/PacchettoPerPubblicazione/Logo3.jpeg",
+    #       contentType = 'image/jpeg',
+    #       width = 400,
+    #       height = 300,
+    #       alt = "This is alternate text")
+    #}, deleteFile = F)
   
     #DataSource <- eventReactive(input$carica, url(input$LinkServer))
     dati1 <- shiny::eventReactive(input$carica,
