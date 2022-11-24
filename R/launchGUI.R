@@ -14,6 +14,11 @@ launchGUI <- function(){
                  "none")
   themes <- c("bw", "grey", "classic", "light")
   ore <- as.character(c(0:23))
+  plottable_vars <- c("DT_max24h", "tempo", "growth_DN", "Ecf_Hz", "Tref0", "Theat0", "Tref1" ,
+  "Theat1", "voltage", "Tair",  "RH", "DT", "do_sap_flow", 
+  "asgharinia_sap_flow" ,"vpd", "EcfHz_clean", "VWC", "DN_610", "DN_680", 
+  "DN_730", "DN_760", "DN_810", "DN_860", "DN_450", "DN_500", "DN_550",
+  "DN_570", "DN_600","DN_650")
   #function for theme change
   theme_switch <- function(plt, theme){
     switch(theme,
@@ -665,7 +670,7 @@ launchGUI <- function(){
     #PLOT BY QUARTER
     output$Qchoice <- output$TSchoice <- shiny::renderUI(selectInput("vartoplotQ",
                                                                      label = "Variable to be plotted",
-                                                                     choices = numeric_variables()))
+                                                                     choices = plottable_vars))
     output$qylab <- shiny::reactive(input$vartoplotQ)
     Qplot <- shiny::eventReactive(input$Qplot,
                                   theme_switch(plotByQuarter(filterByDate(jf_data(),
@@ -693,7 +698,7 @@ launchGUI <- function(){
     #TS PLOT
     output$TSchoice <- shiny::renderUI(selectInput("vartoplotTS",
                                                    label = "Variable to be plotted",
-                                                   choices = numeric_variables()))
+                                                   choices = plottable_vars))
 
     TSplot <- shiny::eventReactive(input$TSplot,
                                    theme_switch(plotTS(filterByDate(jf_data(),
@@ -720,7 +725,7 @@ launchGUI <- function(){
     #PLOT WITH SHADE
     output$shadevar <- shiny::renderUI(shiny::selectInput("shadevariable",
                                                           label = "Variable to plot",
-                                                          choices = numeric_variables()))
+                                                          choices = plottable_vars))
     shadeplot <- shiny::eventReactive(input$plotshade,
                                       plotWithShade(jf_data() %>%
                                                       filterByDate(start = input$shadesdate,
@@ -747,10 +752,10 @@ launchGUI <- function(){
     #scatter plot
     output$var1choice <- shiny::renderUI(selectInput("scv1",
                                                      label = "Variable on x axis",
-                                                     choices = numeric_variables()))
+                                                     choices = plottable_vars))
     output$var2choice <- shiny::renderUI(selectInput("scv2",
                                                      label = "Variable on y axis",
-                                                     choices = numeric_variables()))
+                                                     choices = plottable_vars))
     scplot <- shiny::eventReactive(input$scupdate,
                                    scatterplot(jf_data(),
                                                variable1 = input$scv1,
@@ -776,7 +781,7 @@ launchGUI <- function(){
     #plotByMH
     output$MHchoice <- shiny::renderUI(shiny::selectInput("vartoplotMH",
                                                           label = "Variable to be plotted",
-                                                          choices = numeric_variables()))
+                                                          choices = plottable_vars))
     MHplot <- shiny::eventReactive(input$plotMH,
                                    theme_switch(plotByMH(clean_data = filterByDate(jf_data(),
                                                                                    start = input$startdateMH,
