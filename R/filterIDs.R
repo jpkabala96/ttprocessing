@@ -12,6 +12,7 @@ filterIDs <- function(data4D, ids = ""){
   if(ids[[1]] != ""){
     data4D <- data4D %>% dplyr::filter(id %in% ids)
   }
+    }
   return(data4D)
 }
 
