@@ -9,15 +9,15 @@
 
 join4D49 <- function(data4D, data49){
   jdata <- dplyr::left_join(data4D %>%
-                              dplyr::select(-c("Record")),
+                              dplyr::select(-tidyselect::starts_with(c("Record"))),
                             data49 %>%
-                              dplyr::select(-c("date",
+                              dplyr::select(-tidyselect::starts_with(c("date",
                                                "f_hour",
                                                "hour",
                                                "timestamp",
                                                "Tipo_stringa",
                                                "Record",
-                                               "Record_number")),
+                                               "Record_number"))),
                             by = c("id" = "id",
                                    "date_hour" = "date_hour"))
 
