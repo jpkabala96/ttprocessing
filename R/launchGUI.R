@@ -13,6 +13,7 @@ launchGUI <- function(){
                  "mean",
                  "none")
   themes <- c("bw", "grey", "classic", "light")
+  ore <- as.character(c(0:23))
   #function for theme change
   theme_switch <- function(plt, theme){
     switch(theme,
@@ -597,8 +598,8 @@ launchGUI <- function(){
                                             light_data()))
     output$hoursselection <- shiny::renderUI(checkboxGroupInput("selecthours",
                                                                 label = "Select the hours of interest",
-                                                                choices = hours(),
-                                                                select = "1",
+                                                                choices = ore,
+                                                                select = ore,
                                                                 inline = T))
 
     jf_data <- shiny::reactive(joined_data() %>% filterByHour(hours = input$selecthours))
