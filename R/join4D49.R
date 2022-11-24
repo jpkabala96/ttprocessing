@@ -12,7 +12,7 @@ join4D49 <- function(data4D, data49){
                               dplyr::select(-c("Record")),
                             data49 %>%
                               dplyr::select(-c("date",
-                                               "f_hour"
+                                               "f_hour",
                                                "hour",
                                                "timestamp",
                                                "Tipo_stringa",
