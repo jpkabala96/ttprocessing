@@ -598,7 +598,7 @@ launchGUI <- function(){
     output$hoursselection <- shiny::renderUI(checkboxGroupInput("selecthours",
                                                                 label = "Select the hours of interest",
                                                                 choices = hours(),
-                                                                selected = hours(),
+                                                                selected = hours()[[1]],
                                                                 inline = T))
 
     jf_data <- shiny::reactive(joined_data() %>% filterByHour(hours = input$selecthours))
