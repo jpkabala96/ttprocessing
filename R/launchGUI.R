@@ -843,7 +843,7 @@ launchGUI <- function(){
         paste0(input$growthDataName, ".csv")
       },
       content = function(file) {
-        write.csv(growth(), file)
+        write.csv(growth(), file, row.names = F)
       }
     )
 
@@ -855,12 +855,12 @@ launchGUI <- function(){
         paste0(input$raw_data_name, ".csv")
       },
       content = function(file) {
-        write.csv(dati(), file)
+        write.csv(dati(), file, row.names = F)
       }
     )
     output$clean_data <- shiny::downloadHandler(
       filename = function() {
-        paste0(input$data_name, ".csv")
+        paste0(input$data_name, ".csv", row.names = F)
       },
       content = function(file) {
         write.csv(joined_data(), file)
