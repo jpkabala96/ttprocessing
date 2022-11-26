@@ -285,15 +285,15 @@ clean4DData <- function(data,
   #create time variables and factors
 
   clean_data$hour <- lubridate::hour(clean_data$date_hour)
-  clean_data$f_hour <- as.character(clean_data$hour)
+  clean_data$f_hour <- as.factor(clean_data$hour)
 
   #obtain the month and build also a factor variable for the month
   clean_data$month <- lubridate::month(clean_data$date_hour)
-  clean_data$f_month <- as.character(clean_data$month)
+  clean_data$f_month <- as.factor(clean_data$month)
 
   #obtain the year
   clean_data$year <- lubridate::year(clean_data$date_hour)
-  clean_data$f_year <- as.character(clean_data$year)
+  clean_data$f_year <- as.factor(clean_data$year)
 
   #obtain the quarter
   clean_data$quarter <- quarters(clean_data$date)
