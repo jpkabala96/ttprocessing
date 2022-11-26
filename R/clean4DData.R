@@ -286,6 +286,7 @@ clean4DData <- function(data,
 
   clean_data$hour <- lubridate::hour(clean_data$date_hour)
   clean_data$f_hour <- as.factor(clean_data$hour)
+  levels(clean_data$f_hour) <- as.character(c(0:23))
 
   #obtain the month and build also a factor variable for the month
   clean_data$month <- lubridate::month(clean_data$date_hour)
