@@ -8,11 +8,14 @@
 #' @export
 
 filterIDs <- function(data4D, ids = ""){
-  if(length(ids) >= 1){
-  if(ids[[1]] != ""){
+  if(length(ids == 1)){
+    if(ids[[1]] != ""){
+      data4D <- data4D %>% dplyr::filter(id %in% ids)
+    }
+  }
+  if(length(ids > 1 )){
     data4D <- data4D %>% dplyr::filter(id %in% ids)
   }
-    }
   return(data4D)
 }
 

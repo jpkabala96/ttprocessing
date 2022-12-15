@@ -19,6 +19,7 @@
 #' @import lubridate
 #' @import tidyr
 #' @importFrom utils write.csv
+#' @importFrom utils data
 #' @importFrom stats sd
 #' @importFrom stats quantile
 

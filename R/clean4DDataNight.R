@@ -1,14 +1,17 @@
 #' Clean 4D data
-#' @description This is the main function in this package. Its purpose is to
+#' @description This is a modified version of the main function in this package.
+#'   Its purpose is to
 #'   filter and convert the 4D data from the TT+ raw data downloaded from the server
 #'   The data are converted from DNs to physical quantities using the equations in the
 #'   TT+ manual. The data are also cleaned, removing values that are regarded
 #'   not to be plausible (e.g. temperatures that are too high, too low etc.) by
 #'   calling the helper functions.
+#'   This version calculates the Delta T max for estimating sap flux, only during
+#'   night time. Night time is discriminated from the day time with the suncalc library.
 #'   It returns a data.frame, that, besides columns containing information about
 #'   the device ID and time of measurment, contains the following variables:
 #'   \code{do_sap_flow} Sap flux density calculated with the equation by Do et al.
-#'   (2011). It is expressed as g/(m^2*s).
+#'   (2011). It is expressed as l/(m^2*h).
 #'   \code{sap_flow_one_probe} Sap flux density calculated with the equation by 
 #'   Do et al. (2011), by using only one probe (the heating one). It is 
 #'   expressed as l/(m^2*h).
@@ -21,6 +24,8 @@
 #'   \code{Theat1} Temperature of the heating probe at time 0 in Celsius degrees.
 #'   \code{RH} Relative humidity as %.
 #' @param data Tree talker data, read with the \code{readTTData} function of the package.
+#' @param latitude The latitude of the study site, in degrees (decimal).
+#' @param longitude The longitude of the study site, in degrees (decimal).
 #' @param lower.TTree Lower threshold of temperature inside the trunk. 
 #'    Values lower than this will be regarded as non valid and replaced with NA.
 #'    Default value = \code{0}.
@@ -53,20 +58,21 @@
 #'   species specific coefficient for Stem Water Content estimation. 
 #'   Possible values are \code{"Fagus"} and \code{"Oak"}, with \code{"Fagus"}
 #'   as default value. As more calibrations become available they will be added.
-#' @param tz Timezone of the site analyzed, to properly convert the timestamp in
-#'   the local time value. Defaults to \code{Sys.timezone}.
+#' @param tz Timezone of the study site, to properly convert the timestamp
+#'   in the local time value. Defaults to \code{Sys.timezone}.
 #' @return A data frame with TT+ 4D data: air temperature, relative humidity, vpd, 
 #'   temperatures of the sap flow probes, K index, sap flux estimated with the 
 #'   Do et al. (2011) equation, for two and one probe, sap flux estimated with the 
 #'   equation in Asgharinia et al. (2022), growth raw data (DN), stem Water content
 #'   sensor raw values and values calculated using the species specific calibration 
 #'   equations. 
-#' @references Do, F.C.; Isarangkool Na Ayutthaya, S.; Rocheteau, A. Transient thermal dissipation method for xylem sap flow measurement: Implementation with a single probe. Tree Physiol. 2011, 31, 369 380, doi:10.1093/treephys/tpr020.
-#' 
+#' @references Do, F.C.; Isarangkool Na Ayutthaya, S.; Rocheteau, A. Transient thermal dissipation method for xylem sap flow measurement: Implementation with a single probe. Tree Physiol. 2011, 31, 369– 380, doi:10.1093/treephys/tpr020.
 #'   Asgharinia, S., Leberecht, M., Belelli Marchesini, L., Friess, N., Gianelle, D., Nauss, T., ... & Valentini, R. (2022). Towards Continuous Stem Water Content and Sap Flux Density Monitoring: IoT-Based Solution for Detecting Changes in Stem Water Dynamics. Forests, 13(7), 1040.
 #' @export
 
-clean4DData <- function(data,
+clean4DDataNight <- function(data,
+                        latitude,
+                        longitude,
                         lower.TTree = 0,
                         higher.TTree = 40,
                         lower.TAir = -15,
@@ -74,10 +80,10 @@ clean4DData <- function(data,
                         lower.RH = 35,
                         higher.RH = 100,
                         lower.sap.flow = 0,
-                        higher.sap.flow = 300,
+                        higher.sap.flow = 1080,
                         lower.VWC = 0,
                         higher.VWC = 100,
-                        species = "Fagus",
+                        species = "Beech",
                         tz = Sys.timezone()){
 
   #filter keeping only 4D data
@@ -105,6 +111,7 @@ clean4DData <- function(data,
   print("data ora done")
   data4D <- data4D %>% dplyr::filter(date_hour > "2000-01-01 00:00.00 UTC")#filter removing
   #observations with too old date
+
 
 
   all_times <- seq(from = min(data4D$date_hour),
@@ -224,11 +231,18 @@ clean4DData <- function(data,
     dplyr::group_by(id) %>%
     tidyr::nest() %>%
     dplyr::mutate(data2 = purrr::map(.data$data, calculateTheat10),
-           data = NULL) %>%
+                  data = NULL) %>%
     tidyr::unnest(cols = .data$data2) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(DT = .data$Theat1-.data$Theat10)
   print("Delta T done")
+    #obtain night and day, to estimate delta T only in nighttime
+    clean_data$sunalt <- suncalc::getSunlightPosition(clean_data$date_hour, 
+                                                      keep = "altitude", 
+                                                      lat = latitude, 
+                                                      lon = longitude)$altitude
+    clean_data$DayNight <- ifelse(clean_data$sunalt > 0, "D", 
+                                  "N")
   ##Old code for the delta T  
   #obtain the Delta T
   #clean_data$DT <- (as.double(clean_data$Theat1)-as.double(clean_data$Tref1))-(as.double(clean_data$Theat0)-as.double(clean_data$Tref0))
@@ -238,6 +252,7 @@ clean4DData <- function(data,
     
   
   clean_data <- clean_data %>%
+    dplyr::filter(DayNight == "N") %>% 
     dplyr::group_by(id_date) %>%
     dplyr::summarise(DT_max24h = max(DT)) %>%
     dplyr::right_join(clean_data, by = c("id_date" = "id_date"))
@@ -249,10 +264,10 @@ clean4DData <- function(data,
   #   cleanSapFlow(lower.sap.flow = lower.sap.flow, higher.sap.flow = higher.sap.flow)
   clean_data$K1 <- ((clean_data$DT_max24h / clean_data$DT) -1)
   #When temperature is lower than 0, assume K1 is 0, as the equation might 
-  #yield negative values
+  #yeld negative values
   clean_data$K1 <- ifelse(clean_data$K1 < 0, 0, clean_data$K1)
   #Sap flow according to Do et al. 2011
-  clean_data$do_sap_flow <- 12.95 * clean_data$K1 * 100 /3.6 #calculate the sap flow using the old formula
+  clean_data$do_sap_flow <- 12.95 * clean_data$K1 * 100 * 3.6#calculate the sap flow using the old formula
   #clean the values obtained
   clean_data$do_sap_flow <- cleanSapFlow(clean_data$do_sap_flow,
                                          lower.sap.flow = lower.sap.flow,
@@ -268,29 +283,16 @@ clean4DData <- function(data,
   #                                              lower.sap.flow = lower.sap.flow,
   #                                              higher.sap.flow = higher.sap.flow)
   #Sap flow according to Asgharinia et al. 2022
-  clean_data$asgharinia_sap_flow <- 100 * ((11.3*clean_data$K1/(1-clean_data$K1))^0.77) / 3.6
+  clean_data$asgharinia_sap_flow <- 100 * ((11.3*clean_data$K1/(1-clean_data$K1))^0.77) * 3.6
   #implement the cleaning after studying it
-  
+  clean_data$asgharinia_sap_flow <- cleanSapFlow(clean_data$asgharinia_sap_flow,
+                                         lower.sap.flow = lower.sap.flow,
+                                         higher.sap.flow = higher.sap.flow)
   #calculate vapour pressure deficit
   clean_data$vpd <- VPD(clean_data$Tair, clean_data$RH)
   print("cleaning done")
-
-  #build the coefficients table
-  # STWC_coef <- data.frame(matrix(nrow = 2, ncol = 6))
-  # colnames(STWC_coef) <- c("Species","b0", "b1", "b2")
-  # STWC_coef$Species <- c("Fagus", "Oak")
-  # STWC_coef$b0 <- c(93, 150)
-  # STWC_coef$b1 <- c( -0.23, -0.56)
-  # STWC_coef$b2 <- c( -0.0021, -0.0042)
-  # STWC_coef <- dplyr::filter(STWC_coef, .data$Species == species)
-  # #if the species does not exist use NA
-  # if(nrow(STWC_coef) == 0){
-  #   STWC_coef <- data.frame(matrix(data = NA, nrow = 1, ncol = 6))
-  #   colnames(STWC_coef) <- c("Species","b0", "b1", "b2")
-  #   print("Species not found")
-  #   print("Stem water content won't be computed")
-  # }
-  # 
+  #select proper coefficients for stem water content
+  
   b0 <- ifelse(species == "Fagus",
                93,
                ifelse(species == "Oak",
@@ -303,8 +305,8 @@ clean4DData <- function(data,
                -0.0021,
                ifelse(species == "Oak",
                       -0.0042, NA))
-  
-  
+ 
+
   clean_data$EcfHz_clean  <- cleanSensorSTWC(as.double(data4D$Ecf_Hz))
   #clean_data <- clean_data %>%
   #  group_by(.data$id) %>%
@@ -323,7 +325,7 @@ clean4DData <- function(data,
   #create time variables and factors
 
   clean_data$hour <- lubridate::hour(clean_data$date_hour)
-  clean_data$f_hour <- as.factor(clean_data$hour)
+  clean_data$f_hour <- as.factor(as.character(clean_data$hour))
 
   #obtain the month and build also a factor variable for the month
   clean_data$month <- lubridate::month(clean_data$date_hour)

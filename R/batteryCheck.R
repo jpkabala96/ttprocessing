@@ -11,9 +11,11 @@ batteryCheck <- function(raw_data){
   cloud_data <- raw_data %>% cloudData4B()
   #obtain last voltage
   v_sum_tt <- TTdata %>% dplyr::group_by(.data$id) %>%
+    dplyr::filter(!is.na(.data$voltage)) %>%
     dplyr::filter(.data$date_hour == max(.data$date_hour)) %>%
     dplyr::select(.data$id, .data$date_hour, .data$voltage)
   v_sum_cl <- cloud_data %>%
+    dplyr::filter(!is.na(.data$voltage)) %>%
     dplyr::filter(.data$date_hour == max(.data$date_hour)) %>%
     dplyr::select(.data$id, .data$date_hour, .data$voltage)
   v_sum_cl$voltage <- as.numeric(v_sum_cl$voltage)
