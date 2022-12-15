@@ -1,14 +1,21 @@
-#' Convert trunk temperature from DN to °C
+#' Convert trunk temperature from DN to degrees (C)
 #'
-#' @description Converts the temperature measured inside the trunk from DN to °C
-#'  following the equation in the TT+ manual. Works mainly as a helper function
-#'  inside clean4DData, but can also be called manually.
-#' @param x A numeric vector containing the DN of the trunk temperature measurment
+#' @description Converts the temperature measured inside the trunk from DN to Celsius
+#'  degrees
+#'  using the lookup table of the instrument, that contains, for each possible 
+#'  digital number, the corresponding temperature value. 
+#' @param x A numeric vector containing the DN of the trunk temperature measurment.
+#' @return A numeric vector with the temperatures expressed as Celsius degrees.
 #'@export
 #'
-
 convertTemperature <- function(x){
-  x <- as.double(x)
-  t <- 127.6 - (x*0.006045)+(0.000000126*x^2)-(0.00000000000115*x^3)#converto il DN della sonda di riferimento al tempo 0 in temperatura
-  return(t)
+  #utils::data(temperatureLookUp, package = "ttprocessing")
+
+  temperatures <- data.frame(temperatureDN = as.character(x)) %>%
+    dplyr::left_join(temperatureLookUp, by = c("temperatureDN" = "DNS")) %>%
+    dplyr::select(filled) 
+  temperatures <- as.numeric(temperatures$filled)
+  temperatures <- unlist(temperatures)
+  return(temperatures)
+  
 }

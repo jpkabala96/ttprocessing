@@ -1,51 +1,64 @@
-batteryCheck                Battery check
-calculateSTWC               Calculate Stem Water Content
-clean4DData                 Clean 4D data
-cleanEcfHz                  Clean the raw Ecf Hz values
-cleanRH                     Clean Relative Humidity
-cleanSapFlow                Clean Sap Flow data
-cleanSensorSTWC             Clean the raw data of the STWC sensor
-cleanSTWC                   Clean Stem Water Content converted data
-cleanTAir                   Clean Air Temperature
-cleanTemperatureTree        Clean the temperature recorded inside the trunk
-cloudData4B                 TT cloud 4B string processing
-convertTemperature          Convert trunk temperature from DN to °C
-dailyQualityCheck           Data quality check
-fastBatteryCheck            Check battery level
-filterByDate                Filtering TT data by date
-filterByHour                Filter by hour
-filterIDs                   Filter IDs
-formatBatteryTable          Format battery table
-growthConversion            Growth conversion
-growthElaboration           Growth data elaboration
-growthProcessing            Growth data processing
-h24Clean                    Removes days with NA's recorded during the day
-isolateTT                   Function for filtering TT+ data
-join4D49                    Join string 4D with string 49
-joinByDateTime              Join TT data with other temporal data
-joinTreeAttributes          Join tree attributes
-launchGUI                   Launch the GUI for the package
-mergeSites                  Merge sites
-mergeTTDB                   Merge treetalker databases
-obtainId                    Obtain TT ID
-plotByMH                    Plot 4D data by month and hour
-plotByQuarter               Plot data by quarter of the year
-plotGrowth                  Plot elaborated growth data
-plotHoursTS                 Plot single hours @description This function allows the
-                            user to plot the tree talker time series as points.
-                            Useful while selecting single specific hours.
-plotTS                      Plot the time series
-plotWithShade               Plot shaded Timeseries
-readTTData                  Read TreeTalkers data from server
-removeOosLight              Remove invalid light values
-scatterplot                 Scatterplot of the TT variables
-spectralPlot                TT+ spectral plot
-spectralPlotEnsemble        TT+ spectral plot
-spectralPlotHour            Spectral hourly plot
-stemMoistureIndex           Stem Moisture content
-string49Handling            Function for cleaning string 49 data
-tabLoading                  Create the UI loading Tab
-ttprocessing                ttprocessing: a package for Tree Talkers data
-                            processing and plotting
-tzConvert                   tzConvert converts the time to local time
-VPD                         Vapour Pressure Deficit
+batteryCheck              Battery check
+calculateSTWC             Calculate Stem Water Content
+calculateTheat10          Calculate Theat 10
+clean4DData               Clean 4D data
+clean4DDataNight          Clean 4D data
+cleanEcfHz                Clean the raw Ecf Hz values
+cleanRH                   Clean Relative Humidity
+cleanSapFlow              Clean Sap Flow data
+cleanSensorSTWC           Clean the raw data of the STWC sensor
+cleanSTWC                 Clean Stem Water Content converted data
+cleanTAir                 Clean Air Temperature
+cleanTemperatureTree      Clean the temperature recorded inside the trunk
+cloudData4B               TT cloud 4B string processing
+convertTemperature        Convert trunk temperature from DN to degrees (C)
+dailyNumberTTs            Tree talkers with valid data per day
+dailyQualityCheck         Data quality check
+detectOutliers            Flag ligth data outliers
+deviceFunctioningAssessment
+                          Graphical report of TT+ technical funtioning
+fastBatteryCheck          Check battery level
+filterByDate              Filtering TT data by date
+filterByHour              Filter by hour
+filterIDs                 Filter IDs
+flagOutliers              Flag outliers
+formatBatteryTable        Format battery table
+growthConversion          Growth conversion
+growthElaboration         Growth data elaboration
+growthProcessing          Growth data processing
+h24Clean                  Removes days with NA's recorded during the day
+isolateTT                 Function for filtering TT+ data
+join4D49                  Join string 4D with string 49
+joinByDateTime            Join TT data with other temporal data
+joinTreeAttributes        Join tree attributes
+launchGUI                 Launch the GUI for the package
+launchGUINight            Launch the GUI for the package (nighttime deltaT)
+mergeSites                Merge sites
+mergeTTDB                 Merge treetalker databases
+obtainId                  Obtain TT ID
+plotByMH                  Plot 4D data by month and hour
+plotByQuarter             Plot data by quarter of the year
+plotDeviceFunctioning     Plot device functioning
+plotGrowth                Plot elaborated growth data
+plotHoursTS               Plot single hours @description This function allows
+                          the user to plot the tree talker time series as
+                          points. Useful while selecting single specific
+                          hours.
+plotTS                    Plot the time series
+plotTTsDay                Plot number of TTs per day
+plotWithShade             Plot shaded Timeseries
+readTTData                Read TreeTalkers data from server
+removeOosLight            Remove invalid light values
+removeOutliers            Remove flagged Outliers
+scatterplot               Scatterplot of the TT variables
+spectralPlot              TT+ spectral plot
+spectralPlotEnsemble      TT+ spectral plot
+spectralPlotHour          Spectral hourly plot
+stemMoistureIndex         Stem Moisture content
+string45Handling          Function for handling the string 45 data
+string49Handling          Function for cleaning string 49 data
+tabLoading                Create the UI loading Tab
+ttprocessing              ttprocessing: a package for Tree Talkers data
+                          processing and plotting
+tzConvert                 tzConvert converts the time to local time
+VPD                       Vapour Pressure Deficit

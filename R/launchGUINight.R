@@ -1,4 +1,4 @@
-#' Launch the GUI for the package
+#' Launch the GUI for the package (nighttime deltaT)
 #'
 #' @description This function launches a shiny GUI for the package, that
 #'   allows the user to clean, explore, plot and download the TT data.
@@ -7,7 +7,7 @@
 
 
 
-launchGUI <- function(){
+launchGUINight <- function(){
   #choices for input
   summaries <- c("median",
                  "mean",
@@ -42,7 +42,7 @@ launchGUI <- function(){
   ui <- shiny::fluidPage(
     theme = shinythemes::shinytheme(theme = "cyborg"),
     ###mette logo
-    shiny::titlePanel("TreeTalker data processing",
+    shiny::titlePanel(shiny::div("TreeTalker data processing", shiny::img(src = "C:/Users/casa/Desktop/DottoratoCaserta/PacchettoPerPubblicazione/Logo3.jpeg", height = 100, width = 100)),
                       windowTitle = "TT+ data processing"),
     shiny::tabsetPanel(
       shiny::tabPanel("Loading",
@@ -73,7 +73,75 @@ launchGUI <- function(){
                       )
 
       ),
-      
+      # shiny::tabPanel("Cleaning",
+      #                 shiny::sidebarLayout(
+      #                   sidebarPanel = shiny::sidebarPanel(shiny::actionButton("pulisci", "Clean the data"),
+      #                                                      shiny::uiOutput("selectids"),
+      #                                                      shiny::dateInput("datasetstartdate",
+      #                                                                       label = "Start Date",
+      #                                                                       value = "2020-01-01"),
+      #                                                      shiny::dateInput("datasetenddate",
+      #                                                                       label = "End Date",
+      #                                                                       value = Sys.Date()),
+      #                                                      shiny::numericInput("l.TTree",
+      #                                                                          label = "Min T inside the tree accepted",
+      #                                                                          min = -100,
+      #                                                                          max = 60,
+      #                                                                          step = 1,
+      #                                                                          value = -10),
+      #                                                      shiny::numericInput("h.TTree",
+      #                                                                          label = "Max T inside the tree accepted",
+      #                                                                          min = 10,
+      #                                                                          max = 60,
+      #                                                                          step = 1,
+      #                                                                          value = 40),
+      #                                                      shiny::numericInput("l.Tair",
+      #                                                                          label = "Min T air accepted",
+      #                                                                          min = -100,
+      #                                                                          max = 70,
+      #                                                                          step = 1,
+      #                                                                          value = -15),
+      #                                                      shiny::numericInput("h.Tair",
+      #                                                                          label = "Max T air accepted",
+      #                                                                          min = 0,
+      #                                                                          max = 70,
+      #                                                                          step = 1,
+      #                                                                          value = 55),
+      #                                                      shiny::numericInput("l.sap",
+      #                                                                          label = "Min Sap flow accepted",
+      #                                                                          min = -20,
+      #                                                                          max = 50,
+      #                                                                          step = 1,
+      #                                                                          value = 0),
+      #                                                      shiny::numericInput("h.sap",
+      #                                                                          label = "Max Sap flow accepted",
+      #                                                                          min = 0,
+      #                                                                          max = 10000,
+      #                                                                          step = 1,
+      #                                                                          value = 1000),
+      #                                                      shiny::numericInput("l.RH",
+      #                                                                          label = "Min RH value accepted",
+      #                                                                          min = 0,
+      #                                                                          max = 100,
+      #                                                                          step = 1,
+      #                                                                          value = 35),
+      #                                                      shiny::numericInput("h.RH",
+      #                                                                          label = "Max RH value accepted",
+      #                                                                          min = 0,
+      #                                                                          max = 100,
+      #                                                                          step = 1,
+      #                                                                          value = 100),
+      #                                                      shiny::textInput("data_name", "Dataset name"),
+      #                                                      shiny::downloadButton("clean_data", label = "Download clean data"),
+      #                                                      width = 3
+      #                   ),
+      #                   mainPanel = shiny::verticalLayout(shiny::uiOutput("hoursselection"),
+      #
+      #                                                     shiny::dataTableOutput("data4d"))
+      #
+      #
+      #                 )
+      # ),
       shiny::tabPanel("Data cleaning",
                       shiny::fluidRow(
                         shiny::column(width = 2, shiny::actionButton("pulisci", "Clean the data")),
@@ -90,25 +158,25 @@ launchGUI <- function(){
                       ),
                       shiny::fluidRow(
                         shiny::column(width = 3, shiny::numericInput("l.TTree",
-                                                                     label = "Min T inside the tree accepted (°C)",
+                                                                     label = "Min T inside the tree accepted",
                                                                      min = -100,
                                                                      max = 60,
                                                                      step = 1,
                                                                      value = 0)),
                         shiny::column(width = 3, shiny::numericInput("h.TTree",
-                                                                     label = "Max T inside the tree accepted (°C)",
+                                                                     label = "Max T inside the tree accepted",
                                                                      min = 10,
                                                                      max = 60,
                                                                      step = 1,
                                                                      value = 40)),
                         shiny::column(width = 3, shiny::numericInput("l.Tair",
-                                                                     label = "Min T air accepted (°C)",
+                                                                     label = "Min T air accepted",
                                                                      min = -100,
                                                                      max = 70,
                                                                      step = 1,
                                                                      value = -15)),
                         shiny::column(width = 3, shiny::numericInput("h.Tair",
-                                                                     label = "Max T air accepted (°C)",
+                                                                     label = "Max T air accepted",
                                                                      min = 0,
                                                                      max = 70,
                                                                      step = 1,
@@ -116,37 +184,51 @@ launchGUI <- function(){
                       ),
                       shiny::fluidRow(
                         shiny::column(width = 3, shiny::numericInput("l.sap",
-                                                                     label = "Min Sap flow accepted [g/(m^2*s)]",
+                                                                     label = "Min Sap flow accepted",
                                                                      min = -20,
                                                                      max = 50,
                                                                      step = 1,
                                                                      value = 0)),
                         shiny::column(width = 3, shiny::numericInput("h.sap",
-                                                                     label = "Max Sap flow accepted [g/(m^2*s)]",
+                                                                     label = "Max Sap flow accepted",
                                                                      min = 0,
                                                                      max = 10000,
                                                                      step = 1,
                                                                      value = 1000)),
                         shiny::column(width = 3, shiny::numericInput("l.RH",
-                                                                     label = "Min RH value accepted (%)",
+                                                                     label = "Min RH value accepted",
                                                                      min = 0,
                                                                      max = 100,
                                                                      step = 1,
                                                                      value = 35)),
                         shiny::column(width = 3, shiny::numericInput("h.RH",
-                                                                     label = "Max RH value accepted (%)",
+                                                                     label = "Max RH value accepted",
                                                                      min = 0,
                                                                      max = 100,
                                                                      step = 1,
                                                                      value = 100))
                       ),
                       shiny::fluidRow(
-                        shiny::column(width = 6, shiny::selectInput("species_input",
+                        #change to numeric input latitude and longitude
+                        shiny::column(width = 3, shiny::numericInput("latitude",
+                                                                     label = "Site latitude",
+                                                                     value = 40,
+                                                                     min = -90,
+                                                                     max = 90,
+                                                                     step = 0.001),
+                        ),
+                        shiny::column(width = 3, shiny::numericInput("longitude",
+                                                                     label = "Site longitude",
+                                                                     value = 14,
+                                                                     min = -180,
+                                                                     max = 180,
+                                                                     step = 0.001)),
+                        shiny::column(width = 3, shiny::selectInput("species_input",
                                                                      label = "Species analyzed",
                                                                      choices = c("Fagus",
                                                                                  "Oak",
                                                                                  "Unknown"))),
-                        shiny::column(width = 6, shiny::selectInput("timezone_input",
+                        shiny::column(width = 3, shiny::selectInput("timezone_input",
                                                                     label = "Timezone of the study site",
                                                                     choices = OlsonNames(),
                                                                     selected = Sys.timezone()))
@@ -190,41 +272,6 @@ launchGUI <- function(){
                                                                shiny::plotOutput("cbp"))#add battery voltage plot
                       )
       ),
-      
-      shiny::tabPanel("Functioning",
-                      shiny::sidebarLayout(
-                        shiny::sidebarPanel(
-                          shiny::dateInput("startdateAss",
-                                           label = "Start Date",
-                                           value = "2020-01-01"),
-                          shiny::dateInput("enddateAss",
-                                           label = "End Date",
-                                           value = Sys.Date()),
-                          shiny::uiOutput("idChoice"),
-                          shiny::numericInput("nossAss", 
-                                              label = "Minimum number of valid records",
-                                              value = 24,
-                                              min = 1, max = 24, step = 1),
-                          
-                          shiny::actionButton("plotAss",
-                                              label = "Assess and plot"),
-                          shiny::numericInput("assWidth", label = "Plot width (cm)",
-                                              value = 8, min = 1, max = 49, step = 0.01),
-                          shiny::numericInput("assHeight", label = "Plot height (cm)",
-                                              value = 5, min = 1, max = 49, step = 0.01),
-                          shiny::textInput("assFilename", label = "Plot filename",
-                                           value = "plot"),
-                          shiny::downloadButton("assDownload"),
-                          width = 3
-                        ),
-                        
-                        shiny::mainPanel(
-                          shiny::plotOutput("assPlot")
-                        )
-                      )
-      ),
-      
-      
       shiny::tabPanel("MH plots",
                       shiny::sidebarLayout(
                         shiny::sidebarPanel(
@@ -544,7 +591,9 @@ launchGUI <- function(){
     cloud_data <- shiny::reactive(cloudData4B(dati()))
     output$dati <- shiny::renderDataTable(dati())
     dati_clean <- shiny::eventReactive(input$pulisci,
-                                       filterByDate(h24Clean(clean4DData(dati(),
+                                       filterByDate(h24Clean(clean4DDataNight(dati(),
+                                                                              latitude = input$latitude,
+                                                                              longitude = input$longitude,
                                                                          lower.TTree = input$l.TTree,
                                                                          higher.TTree = input$h.TTree,
                                                                          lower.TAir = input$l.Tair,
@@ -632,38 +681,7 @@ launchGUI <- function(){
     output$cbp <- shiny::renderPlot(cb_plot())
     output$bpt <- shiny::renderText("Battery voltage plot")
     output$btt <- shiny::renderText("Battery voltage table")
-    
-    ## CHOOSE ID TO ASSESS
-    output$idChoice <- shiny::renderUI(
-      shiny::selectInput("ID_to_assess",
-                         label = "ID to be assessed",
-                         choices = ids())
-    )
-    
-    
-    ##Device assessment plot
-    assessment_plot <- shiny::eventReactive(input$plotAss, 
-                         deviceFunctioningAssessment(jf_data(),
-                                                     id = input$ID_to_assess,
-                                                     start_date = input$startdateAss,
-                                                     end_date = input$enddateAss, 
-                                                     min_valid_obs = input$nossAss)) 
-    
-    output$assPlot <- shiny::renderPlot(assessment_plot())
-    
-    output$assDownload <- shiny::downloadHandler(
-      filename = function() { paste0(input$assFilename, '.png') },
-      content = function(file) {
-        ggplot2::ggsave(file,
-                        plot = assessment_plot(),
-                        device = "png",
-                        units = "cm",
-                        width = input$assWidth,
-                        height = input$assHeight)
-      }
-    )
-    
-    
+
     #PLOT BY QUARTER
     output$Qchoice <- output$TSchoice <- shiny::renderUI(selectInput("vartoplotQ",
                                                                      label = "Variable to be plotted",

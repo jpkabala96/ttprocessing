@@ -13,8 +13,7 @@
 dailyQualityCheck <- function(TTdata4d){
   first_cols <- c("id", "date")
   cols_to_assess <- c("Tref0", "Theat0", "Tref1", "Theat1", "voltage", "Tair",
-                      "RH", "do_sap_flow", "vpd", "sap_flow_one_probe", 
-                      "asgharinia_sap_flow")
+                      "RH", "do_sap_flow", "vpd", "asgharinia_sap_flow", "VWC")
   pl <- TTdata4d %>%
     tidyr::pivot_longer(cols = cols_to_assess, names_to = "col", values_to = "value") %>%
     dplyr::group_by(id, date, col) %>%
