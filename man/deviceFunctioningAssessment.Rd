@@ -23,6 +23,10 @@ deviceFunctioningAssessment(
 
 \item{end_date}{Date of end of the time frame of interest.}
 }
+\value{
+A ggplot object, the plot with the graphical assesment of the functioning
+  of the device corresponding to that ID.
+}
 \description{
 This function creates a graphical report of dayly probe state and
   device battery voltage for a specific Tree talker during a time specified by

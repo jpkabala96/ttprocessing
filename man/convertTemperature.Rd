@@ -2,15 +2,19 @@
 % Please edit documentation in R/convertTemperature.R
 \name{convertTemperature}
 \alias{convertTemperature}
-\title{Convert trunk temperature from DN to °C}
+\title{Convert trunk temperature from DN to degrees (C)}
 \usage{
 convertTemperature(x)
 }
 \arguments{
-\item{x}{A numeric vector containing the DN of the trunk temperature measurment}
+\item{x}{A numeric vector containing the DN of the trunk temperature measurment.}
+}
+\value{
+A numeric vector with the temperatures expressed as Celsius degrees.
 }
 \description{
-Converts the temperature measured inside the trunk from DN to °C
- following the equation in the TT+ manual. Works mainly as a helper function
- inside clean4DData, but can also be called manually.
+Converts the temperature measured inside the trunk from DN to Celsius
+ degrees
+ using the lookup table of the instrument, that contains, for each possible 
+ digital number, the corresponding temperature value.
 }

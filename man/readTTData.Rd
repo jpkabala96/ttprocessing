@@ -4,10 +4,22 @@
 \alias{readTTData}
 \title{Read TreeTalkers data from server}
 \usage{
-readTTData(link_string)
+readTTData(
+  link_string,
+  start_date = "2015-01-01",
+  end_date = Sys.Date() + as.difftime(1, units = "days")
+)
 }
 \arguments{
-\item{link_string}{should be the string of the server link to the Tree Talkers data, you can use also the path to the data file if you have downloaded them}
+\item{link_string}{Should be the string of the server link to the Tree Talkers data, you can use also the path to the data file if you have downloaded them}
+
+\item{start_date}{A string representing the first possible date. Timestamps
+representing time before this date will be discarded. Default value 
+\code{"2015-01-01"}.}
+
+\item{end_date}{A string representing the date corresponding to the maximum 
+timestamp allowed in the data. Strings with higher timestamp values will be
+discarded. Default value: \code{Sys.Date() + as.difftime(1, units = "days")}.}
 }
 \value{
 an object of class "tbl" , "data.table", "data.frame"
