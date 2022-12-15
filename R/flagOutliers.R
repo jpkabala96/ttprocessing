@@ -51,7 +51,7 @@ flagOutliers <- function(TTdata, variables, week = T){
   if(week != T){
     for(i in 1:length(variables)){
       TTdata <- TTdata %>% 
-        dplyr::mutate(f_month = as.character((format(.data$date, "%M"))),
+        dplyr::mutate(f_month = as.character(lubridate::month(.data$date)),
                       year = lubridate::year(.data$date),
                       f_my = paste(year, f_month, sep = "_"))
       quantiles <- TTdata %>%
