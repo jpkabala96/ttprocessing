@@ -1,6 +1,9 @@
 #' Function for cleaning string 49 data
-#' @description This function isolates the 49 string, and uniforms the data
-#'   setting them to the same gain.
+#' @description This function isolates the 49 string, containing light data and 
+#'   uniforms the data
+#'   setting them to the same gain. Then data are multiplyied by the proper
+#'   coefficient to convert DNs to microWatt per squared centimetre.
+#'   The coefficients used are the ones provided by Belelli Marchesini et al.
 #' @param raw_data Raw data as those downloaded with readTTData.
 #' @param time_zone Time zone to be used. Defaults to Sys.timezone().
 #'
@@ -57,47 +60,49 @@ string49Handling <- function(raw_data, time_zone = Sys.timezone()){
   DNS <- DNS %>% apply(MARGIN = 2,
                        FUN = removeOosLight)
   DNSg2 <- (DNS / data49$divider) * 16
-
+  #it seems there are no intercepts for the calibration
+  #for now set them equal to 0
+  #in the future maybe this part of the code will be removed
   #matrix of intercepts
-  cal.i <- as.data.frame(matrix(nrow = nrow(DNSg2), ncol = ncol(DNSg2)))
-  colnames(cal.i) <- colnames(DNSg2)
-
-  cal.i$DN_610 <- -312.45
-  cal.i$DN_680 <- -561.56
-  cal.i$DN_730 <- -1511.2
-  cal.i$DN_760 <- -1012.5
-  cal.i$DN_810 <- 91.58
-  cal.i$DN_860 <- 334.88
-  cal.i$DN_450 <-  -212.62
-  cal.i$DN_500 <- -232.13
-  cal.i$DN_550 <- -842.1
-  cal.i$DN_570 <- -666.72
-  cal.i$DN_600 <- -328.08
-  cal.i$DN_650 <- 202.77
-
-  cal.i <- as.matrix(cal.i)
+  # cal.i <- as.data.frame(matrix(nrow = nrow(DNSg2), ncol = ncol(DNSg2)))
+  # colnames(cal.i) <- colnames(DNSg2)
+  # 
+  # cal.i$DN_610 <- 0
+  # cal.i$DN_680 <- 0
+  # cal.i$DN_730 <- 0
+  # cal.i$DN_760 <- 0
+  # cal.i$DN_810 <- 0
+  # cal.i$DN_860 <- 0
+  # cal.i$DN_450 <- 0
+  # cal.i$DN_500 <- 0
+  # cal.i$DN_550 <- 0
+  # cal.i$DN_570 <- 0
+  # cal.i$DN_600 <- 0
+  # cal.i$DN_650 <- 0
+  # 
+  # cal.i <- as.matrix(cal.i)
 
   #matrix of m
   cal.m <- as.data.frame(matrix(data = NA, nrow = nrow(DNSg2), ncol = ncol(DNSg2)))
   colnames(cal.m) <- colnames(DNSg2)
-
-  cal.m$DN_610 <- 1.6699
-  cal.m$DN_680 <- 1.5199
-  cal.m$DN_730 <- 1.6209
-  cal.m$DN_760 <- 1.4549
-  cal.m$DN_810 <- 0.8414
-  cal.m$DN_860 <- 0.531
-  cal.m$DN_450 <-  0.4562
-  cal.m$DN_500 <- 0.6257
-  cal.m$DN_550 <- 1.0546
-  cal.m$DN_570 <- 1.0462
-  cal.m$DN_600 <- 0.8654
-  cal.m$DN_650 <- 0.7829
+  #version with the new coefficients by Belelli Marchesini (in preparation)
+  cal.m$DN_610 <- 989.1
+  cal.m$DN_680 <- 957.1
+  cal.m$DN_730 <- 943.2
+  cal.m$DN_760 <- 915.2
+  cal.m$DN_810 <- 1000.9
+  cal.m$DN_860 <- 994.3
+  cal.m$DN_450 <- 2214.6
+  cal.m$DN_500 <- 2002.7
+  cal.m$DN_550 <- 1715.4
+  cal.m$DN_570 <- 1690.9
+  cal.m$DN_600 <- 1605.8
+  cal.m$DN_650 <- 1542.0
 
   cal.m <- as.matrix(cal.m)
 
-  DNS_corr <- cal.i + (DNSg2 * cal.m)
-  DNS_corr[DNS_corr < 0] <- 0
+  DNS_corr <-  (DNSg2 / cal.m)
+  ##DNS_corr[DNS_corr < 0] <- 0
   #convert the timestamp to local time
   data49$date_hour <- as.POSIXct(as.double(data49$timestamp),
                                  origin = '1970-01-01 00:00.00',
