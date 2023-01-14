@@ -4,14 +4,14 @@
 \alias{flagOutliers}
 \title{Flag outliers}
 \usage{
-flagOutliers(TTdata, variables, week = T)
+flagOutliers(TTdata, variables, timeperiod = "month")
 }
 \arguments{
 \item{TTdata}{Dataframe with TreeTalker data}
 
 \item{variables}{Variables to which to apply the function.}
 
-\item{week}{Flag (\code{TRUE or FALSE}). if TRUE data are grouped by week, 
+\item{timeperiod}{Flag (\code{"month" or "week" or "all"}). if TRUE data are grouped by week, 
 else are grouped by month for applying the procedure.}
 }
 \description{

@@ -12,6 +12,9 @@ string49Handling(raw_data, time_zone = Sys.timezone())
 \item{time_zone}{Time zone to be used. Defaults to Sys.timezone().}
 }
 \description{
-This function isolates the 49 string, and uniforms the data
-  setting them to the same gain.
+This function isolates the 49 string, containing light data and 
+  uniforms the data
+  setting them to the same gain. Then data are multiplyied by the proper
+  coefficient to convert DNs to microWatt per squared centimetre.
+  The coefficients used are the ones provided by Belelli Marchesini et al.
 }
