@@ -28,7 +28,7 @@ flagOutliers <- function(TTdata, variables, timeperiod = "month"){
       print("quantiles 1 done week")
       quantiles <- quantiles %>% 
         dplyr::mutate(
-          "IQR_{variables[[i]]}" := eval(parse(text = paste("Q25",variables[[i]], sep = "_")))  - eval(parse(text = paste("Q75",variables[[i]], sep = "_"))),
+          "IQR_{variables[[i]]}" := eval(parse(text = paste("Q75",variables[[i]], sep = "_"))) - eval(parse(text = paste("Q25",variables[[i]], sep = "_"))) ,
           "QMAX_{variables[[i]]}" := eval(parse(text = paste("Q75",variables[[i]], sep = "_"))) + 1.5 * eval(parse(text = paste("IQR",variables[[i]], sep = "_"))),
           "QMIN_{variables[[i]]}" := eval(parse(text = paste("Q25",variables[[i]], sep = "_"))) - 1.5 * eval(parse(text = paste("IQR",variables[[i]], sep = "_"))))
       print("quantiles 2 done week")
