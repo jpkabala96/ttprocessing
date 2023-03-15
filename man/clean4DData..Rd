@@ -15,7 +15,8 @@ string45Handling(
   lower.sap.flow = 0,
   higher.sap.flow = 1080,
   remove.raw = "yes",
-  rectangular = "no"
+  rectangular = "no",
+  tz = Sys.timezone()
 )
 }
 \arguments{
@@ -52,16 +53,16 @@ be replaced with NA. Default value = \code{0}.}
 \item{higher.sap.flow}{Higher threshold of sap flow. Values higher than this will be 
 considered invalid and replaced with NA. Default value = \code{1080}.}
 
+\item{remove.raw}{If to remove columns of raw data or retain them. Default value:
+ \code{"yes"}
+to remove them, in any other case they will be retained.}
+
 \item{rectangular}{If to retain dates and hours of missing strings. If \code{"no"}
 they will be discarded, getting lighter data. In any other case the full grid of
 ids x times will be kept.}
 
 \item{tz}{Timezone of the site analyzed, to properly convert the timestamp in
 the local time value. Defaults to \code{Sys.timezone}.}
-
-\item{remove_raw}{If to remove columns of raw data or retain them. Default value:
- \code{"yes"}
-to remove them, in any other case they will be retained.}
 }
 \value{
 A data frame with TT+ 4D data: air temperature, relative humidity, vpd, 

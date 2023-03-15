@@ -6,6 +6,9 @@
 \usage{
 cleanEcfHz(Ecf_Hz)
 }
+\arguments{
+\item{Ecf_Hz}{The numeric values of Ecf.}
+}
 \description{
 Clean the Ecf Hz sensor values, removing those less than 10000
   and higher than 50000. This is true for 50 kHz sensor. A later version 

@@ -22,6 +22,10 @@ deviceFunctioningAssessment(
 \item{start_date}{Date of start of the time frame of interest.}
 
 \item{end_date}{Date of end of the time frame of interest.}
+
+\item{min_valid_obs}{Number of minimum valid records required. If that
+minimum value is reached, the corresponding cell il colored in green, 
+while if not it is colored in red in the output plot.}
 }
 \value{
 A ggplot object, the plot with the graphical assesment of the functioning

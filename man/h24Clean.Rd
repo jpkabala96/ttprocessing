@@ -7,6 +7,8 @@
 h24Clean(data, cols_to_clean = "do_sap_flow", complete_required = 24)
 }
 \arguments{
+\item{data}{The data.frame of 4D data to be cleaned.}
+
 \item{cols_to_clean}{A character vector with the names of the columns to clean.}
 
 \item{complete_required}{Complete observations during the day, to retain the

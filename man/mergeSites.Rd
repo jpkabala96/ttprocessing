@@ -9,6 +9,13 @@ mergeSites(
   site_names = as.character(c(1:length(TT_data_frames)))
 )
 }
+\arguments{
+\item{TT_data_frames}{list of TT data frames to be merged.}
+
+\item{site_names}{Names of the sites to which the data.frames belong. 
+If not provided, by default, they will be named with progressive numbers in 
+the order they were supplied.}
+}
 \description{
 This function allows the user to merge the clean TT data
   of some sites together. The function is a wrapper around the dplyr
