@@ -1,7 +1,7 @@
 Package: ttprocessing
 Type: Package
 Title: Processing Tree Talker data
-Version: 0.1.0
+Version: 0.2.0
 Author: Jerzy Piotr Kabala
 Maintainer: Jerzy Piotr Kabala <jerzypiotr.kabala@unicampania.it>
 Description: Package for processing, converting and plotting the Tree 	Talker data.
@@ -30,6 +30,7 @@ Imports:
     tidyr,
     tidyselect,
     utils,
-    ggpubr
+    ggpubr,
+    runner
 Depends: 
     R (>= 2.10)
