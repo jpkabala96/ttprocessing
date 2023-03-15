@@ -8,6 +8,9 @@
 #'   4d data column id. 
 #' @param start_date Date of start of the time frame of interest.
 #' @param end_date Date of end of the time frame of interest.
+#' @param min_valid_obs Number of minimum valid records required. If that
+#'   minimum value is reached, the corresponding cell il colored in green, 
+#'   while if not it is colored in red in the output plot. 
 #' @return A ggplot object, the plot with the graphical assesment of the functioning
 #'   of the device corresponding to that ID. 
 #' @export

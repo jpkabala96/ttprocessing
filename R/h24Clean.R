@@ -7,6 +7,7 @@
 #'   during all the day by the probes. Invalid values, or not complete observation
 #'   Might lead to a bad estimation of the Sap Flow.
 #'   Can be applied also to the other columns.
+#' @param data The data.frame of 4D data to be cleaned.
 #' @param cols_to_clean A character vector with the names of the columns to clean.
 #' @param complete_required Complete observations during the day, to retain the
 #'   values recorded during that day. Defaults to 24 (all the records during

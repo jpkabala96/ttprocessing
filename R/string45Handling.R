@@ -28,7 +28,7 @@
 #' considered invalid and replaced with NA. Default value = \code{1080}.
 #' @param tz Timezone of the site analyzed, to properly convert the timestamp in
 #'   the local time value. Defaults to \code{Sys.timezone}.
-#' @param remove_raw If to remove columns of raw data or retain them. Default value:
+#' @param remove.raw If to remove columns of raw data or retain them. Default value:
 #'    \code{"yes"}
 #'   to remove them, in any other case they will be retained.
 #' @param rectangular If to retain dates and hours of missing strings. If \code{"no"}
@@ -51,7 +51,8 @@ string45Handling <- function(TTdata,
                              lower.TAir = -15, higher.TAir = 50,
                              lower.RH = 35, higher.RH = 100, 
                              lower.sap.flow = 0, higher.sap.flow = 1080,
-                             remove.raw = "yes", rectangular = "no"){
+                             remove.raw = "yes", rectangular = "no",
+                             tz = Sys.timezone()){
   colnames_string45 <- c("record", "record_number", "string_type", "timestamp","Tref0_r", "Theat0_r", "growth_DN",
                          "vbat_r", "nbits", "RH_r", "Tair_r", "gz_mean", "gz_sd", "gy_mean", "gy_sd",
                          "gx_mean", "gx_sd", "Tref1_r","Theat1_r", "Ecf_Hz")
@@ -67,7 +68,7 @@ string45Handling <- function(TTdata,
   string45_data <- string45_data %>% 
     dplyr::mutate(id = obtainId(record),
                   time = tzConvert(as.POSIXct(as.double(.data$timestamp), origin = "1970-01-01 00:00.00", 
-                                              tz = "UTC")),
+                                              tz = "UTC"), tz = tz),
                   date_hour = lubridate::make_datetime(year = lubridate::year(.data$time), 
                                                        month = lubridate::month(.data$time), 
                                                        day = lubridate::day(.data$time), 

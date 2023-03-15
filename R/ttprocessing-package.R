@@ -22,6 +22,7 @@
 #' @importFrom utils data
 #' @importFrom stats sd
 #' @importFrom stats quantile
+#' @import runner
 
 ## usethis namespace: start
 #' @importFrom rlang na_dbl

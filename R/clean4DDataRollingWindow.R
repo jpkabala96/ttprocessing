@@ -53,6 +53,7 @@
 #'   species specific coefficient for Stem Water Content estimation. 
 #'   Possible values are \code{"Fagus"} and \code{"Oak"}, with \code{"Fagus"}
 #'   as default value. As more calibrations become available they will be added.
+#' @param window.length The length, in days, of the running window.
 #' @param tz Timezone of the site analyzed, to properly convert the timestamp in
 #'   the local time value. Defaults to \code{Sys.timezone}.
 #' @return A data frame with TT+ 4D data: air temperature, relative humidity, vpd, 
@@ -66,7 +67,7 @@
 #'   Asgharinia, S., Leberecht, M., Belelli Marchesini, L., Friess, N., Gianelle, D., Nauss, T., ... & Valentini, R. (2022). Towards Continuous Stem Water Content and Sap Flux Density Monitoring: IoT-Based Solution for Detecting Changes in Stem Water Dynamics. Forests, 13(7), 1040.
 #' @export
 
-clean4DData <- function(data,
+clean4DDataRollingWindow <- function(data,
                         lower.TTree = 0,
                         higher.TTree = 40,
                         lower.TAir = -15,
@@ -78,6 +79,7 @@ clean4DData <- function(data,
                         lower.VWC = 0,
                         higher.VWC = 100,
                         species = "Fagus",
+                        window.length = 7,
                         tz = Sys.timezone()){
 
   #filter keeping only 4D data
@@ -235,11 +237,25 @@ clean4DData <- function(data,
   #clean_data$DT_oneprobe <- as.double(clean_data$Theat1)-as.double(clean_data$Theat0)
   #obtain the max Delta T during the day, and ad it to the clean_data data.frame
   #by using a join function
-    
   
-  clean_data <- clean_data %>%
-    dplyr::group_by(id_date) %>%
+  #declare a helper function that is a wrapper to apply rolling window max
+  runningDeltaTMax <- function(dati, l){
+    dati$DTmax_rw <- runner::max_run(dati$DT_max24h, k = l, lag = 0)
+    return(dati)
+  }
+  
+  #modified version of the pipeline, to obtain delta T max over a rolling window
+  clean_data <- clean_data[order(clean_data$date_hour),] %>%
+    dplyr::group_by(id, id_date) %>%
     dplyr::summarise(DT_max24h = max(DT)) %>%
+    dplyr::ungroup() %>%
+    dplyr::group_by(id) %>%
+    tidyr::nest() %>%
+    dplyr::mutate(data2 = purrr::map2(.data$data, window.length,runningDeltaTMax),
+                  data = NULL) %>%
+    tidyr::unnest(cols = c(data2)) %>%
+    dplyr::ungroup() %>%
+    dplyr::select(-id) %>%
     dplyr::right_join(clean_data, by = c("id_date" = "id_date"))
 
   #calculate the sap flow using the formulas available
@@ -247,7 +263,7 @@ clean4DData <- function(data,
   #   cleanSapFlow(lower.sap.flow = lower.sap.flow, higher.sap.flow = higher.sap.flow)
   # clean_data$do_sap_flow_old <- (12.95*(((clean_data$DT_max24h/clean_data$DT)-1))*27.777)*3.6 %>%
   #   cleanSapFlow(lower.sap.flow = lower.sap.flow, higher.sap.flow = higher.sap.flow)
-  clean_data$K1 <- ((clean_data$DT_max24h / clean_data$DT) -1)
+  clean_data$K1 <- ((clean_data$DTmax_rw / clean_data$DT) -1)
   #When temperature is lower than 0, assume K1 is 0, as the equation might 
   #yield negative values
   clean_data$K1 <- ifelse(clean_data$K1 < 0, 0, clean_data$K1)
@@ -272,6 +288,7 @@ clean4DData <- function(data,
   clean_data$asgharinia_sap_flow <- cleanSapFlow(clean_data$asgharinia_sap_flow, 
                                                  lower.sap.flow = lower.sap.flow,
                                                  higher.sap.flow = higher.sap.flow)
+  
   
   #calculate vapour pressure deficit
   clean_data$vpd <- VPD(clean_data$Tair, clean_data$RH)
