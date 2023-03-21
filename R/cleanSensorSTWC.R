@@ -10,7 +10,7 @@
 #'   @example
 #'   STWC_DN <- c(2000, 7800, 8399, 13890, 17900)
 #'   cleanSensorSTWC(STWC_DN)
-#'
+#' @export
 
 
 

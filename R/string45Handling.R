@@ -50,7 +50,7 @@ string45Handling <- function(TTdata,
                              lower.TTree = 0, higher.TTree = 40,
                              lower.TAir = -15, higher.TAir = 50,
                              lower.RH = 35, higher.RH = 100, 
-                             lower.sap.flow = 0, higher.sap.flow = 1080,
+                             lower.sap.flow = 0, higher.sap.flow = 360,
                              remove.raw = "yes", rectangular = "no",
                              tz = Sys.timezone()){
   colnames_string45 <- c("record", "record_number", "string_type", "timestamp","Tref0_r", "Theat0_r", "growth_DN",
@@ -69,14 +69,15 @@ string45Handling <- function(TTdata,
     dplyr::mutate(id = obtainId(record),
                   time = tzConvert(as.POSIXct(as.double(.data$timestamp), origin = "1970-01-01 00:00.00", 
                                               tz = "UTC"), tz = tz),
-                  date_hour = lubridate::make_datetime(year = lubridate::year(.data$time), 
-                                                       month = lubridate::month(.data$time), 
-                                                       day = lubridate::day(.data$time), 
-                                                       hour = lubridate::hour(.data$time)),
+                  date_hour = lubridate::make_datetime(year = lubridate::year(time), 
+                                                       month = lubridate::month(time), 
+                                                       day = lubridate::day(time), 
+                                                       hour = lubridate::hour(time)),
+                  time = NULL,
                   is_record = T)
   string45_data <- string45_data %>% 
     dplyr::filter(date_hour > "2000-01-01 00:00.00 UTC")
-  all_times <- seq(from = min(string45_data$date_hour), to = max(string45_data$date_hour), 
+  all_times <- seq.POSIXt(from = min(string45_data$date_hour), to = max(string45_data$date_hour), 
                    by = "1 hour")
   all_ids <- unique(string45_data$id)
   grd <- expand.grid(all_times, all_ids)
@@ -85,81 +86,84 @@ string45Handling <- function(TTdata,
                                     string45_data,
                                     by = c("id" = "id", 
                                            "date_hour" = "date_hour"))
+  
   string45_clean <- string45_data %>%
-    dplyr::mutate(Tref0 = cleanTemperatureTree(.data$Tref0_r/10,
+    dplyr::mutate(Tref0 = cleanTemperatureTree(Tref0_r/10,
                                                lower.TTree = lower.TTree,
                                                higher.TTree = higher.TTree),
-                  Tref1 = cleanTemperatureTree(.data$Tref1_r/10,
+                  Tref1 = cleanTemperatureTree(Tref1_r/10,
                                                lower.TTree = lower.TTree,
                                                higher.TTree = higher.TTree),
-                  Theat0 = cleanTemperatureTree(.data$Theat0_r/10,
+                  Theat0 = cleanTemperatureTree(Theat0_r/10,
                                                 lower.TTree = lower.TTree,
                                                 higher.TTree = higher.TTree),
-                  Theat1 = cleanTemperatureTree(.data$Theat1_r/10,
+                  Theat1 = cleanTemperatureTree(Theat1_r/10,
                                                 lower.TTree = lower.TTree,
                                                 higher.TTree = higher.TTree),
-                  voltage = 650+(131072*(1100/.data$vbat_r)),
-                  Tair = cleanTAir(.data$Tair_r/10, 
+                  voltage = 650+(131072*(1100/vbat_r)),
+                  Tair = cleanTAir(Tair_r/10, 
                                    lower.TAir = lower.TAir,
                                    higher.TAir = higher.TAir),
                   RH = cleanRH(RH_r, lower.RH = lower.RH, higher.RH = higher.RH),
                   vpd = VPD(Tair = Tair, RH = RH),
-                  DT = .data$Theat1-.data$Tref1 - .data$Theat0 + .data$Tref0,
-                  DT_oneprobe = .data$Theat1-.data$Theat0,
+                  DT = Theat1-Tref1 - Theat0 + Tref0,
+                  DT_oneprobe = Theat1 - Theat0,
                   date = as.Date(date_hour),
-                  hour = lubridate::hour(.data$date_hour),
-                  f_hour = as.character(lubridate::hour(.data$date_hour)),
-                  month = lubridate::month(.data$date_hour),
-                  f_month = as.character(lubridate::month(.data$date_hour)),
-                  year = lubridate::year(.data$date_hour),
-                  f_year = as.character(lubridate::year(.data$date_hour)),
+                  hour = lubridate::hour(date_hour),
+                  f_hour = as.character(lubridate::hour(date_hour)),
+                  month = lubridate::month(date_hour),
+                  f_month = as.character(lubridate::month(date_hour)),
+                  year = lubridate::year(date_hour),
+                  f_year = as.character(lubridate::year(date_hour)),
                   quarter = quarters(date),
-                  yq = paste(.data$f_year, .data$quarter, sep = "-"),
+                  yq = paste(f_year, quarter, sep = "-"),
                   id_date = paste(id, date, sep = "-")
     )
   string45_clean <- string45_clean[order(string45_clean$date_hour),] %>%
     dplyr::group_by(id) %>%
     tidyr::nest() %>%
-    dplyr::mutate(data2 = purrr::map(.data$data, calculateTheat10),
-                  data = NULL) %>%
-    tidyr::unnest(cols = .data$data2) %>%
+    dplyr::rename(original_data = data) %>%
+    dplyr::mutate(data2 = purrr::map(original_data, calculateTheat10),
+                  original_data = NULL) %>%
+    tidyr::unnest(cols = data2) %>%
     dplyr::ungroup() %>%
-    dplyr::mutate(DT = .data$Theat1-.data$Theat10)
+    dplyr::mutate(DT = Theat1 - Theat10)
   print("Delta T done")
   
   
-  string45_clean <- string45_clean %>% dplyr::group_by(.data$id_date) %>% 
-    dplyr::summarise(DT_max24h = max(.data$DT)) %>% 
+  string45_clean <- string45_clean %>% dplyr::group_by(id_date) %>% 
+    dplyr::summarise(DT_max24h = max(DT)) %>% 
     dplyr::ungroup() %>%
     dplyr::right_join(string45_clean, by = c("id_date" = "id_date"))
   
   string45_clean <- string45_clean %>%
     dplyr::mutate(
-      K = ((.data$DT_max24h/.data$DT)-1),
-      do_sap_flux = cleanSapFlow(12.95*.data$K*100,
+      K1 = ((DT_max24h/DT)-1),
+      do_sap_flow = cleanSapFlow(12.95*K1*100/3.6,
                                  lower.sap.flow = lower.sap.flow,
                                  higher.sap.flow = higher.sap.flow),
-      asgharinia_sap_flux = cleanSapFlow(100 * ((11.3 * .data$K/(1 -.data$K))^0.77),
+      asgharinia_sap_flow = cleanSapFlow(100 * ((11.3 * K1/(1 - K1))^0.77) /3.6,
                                          lower.sap.flow = lower.sap.flow,
                                          higher.sap.flow = higher.sap.flow))
   
   if(remove.raw == "yes"){
     string45_clean <- string45_clean %>%
-      dplyr::select(-.data$record, 
-                    -.data$record_number, 
-                    -.data$timestamp, 
-                    -.data$Tref0_r,
-                    -.data$Tref1_r,
-                    -.data$Theat0_r,
-                    -.data$Theat1_r,
-                    -.data$vbat_r,
-                    -.data$Tair_r,
-                    -.data$RH_r)
+      dplyr::select(-record, 
+                    -record_number, 
+                    -timestamp, 
+                    -Tref0_r,
+                    -Tref1_r,
+                    -Theat0_r,
+                    -Theat1_r,
+                    -vbat_r,
+                    -Tair_r,
+                    -RH_r)
   }
   if(rectangular == "no"){
     string45_clean <- string45_clean %>%
-      dplyr::filter(.data$is_record == T)
+      dplyr::filter(is_record == T)
   }
+  
   return(string45_clean)
   
 }

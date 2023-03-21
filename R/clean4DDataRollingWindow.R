@@ -109,7 +109,7 @@ clean4DDataRollingWindow <- function(data,
   #observations with too old date
 
 
-  all_times <- seq(from = min(data4D$date_hour),
+  all_times <- seq.POSIXt(from = min(data4D$date_hour),
                    to = max(data4D$date_hour),
                    by = "1 hour")
   all_ids <- unique(data4D$id)

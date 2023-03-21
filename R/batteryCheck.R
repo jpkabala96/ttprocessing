@@ -7,7 +7,8 @@
 
 batteryCheck <- function(raw_data){
   #process the data
-  TTdata <- raw_data %>% clean4DData()
+  TTdata <- raw_data %>% convertStringsEnsemble(startdate = "2015-01-01", 
+                                                enddate = Sys.Date()+ as.difftime(1, units = "days"))
   cloud_data <- raw_data %>% cloudData4B()
   #obtain last voltage
   v_sum_tt <- TTdata %>% dplyr::group_by(.data$id) %>%
