@@ -156,7 +156,8 @@ clean4DData <- function(data,
                                          tempo,
                                          growth_DN,
                                          nbits,
-                                         Ecf_Hz)
+                                         Ecf_Hz) %>% 
+    dplyr::mutate(nbits = as.double(nbits))
   clean_data$Ecf_Hz <- as.double(clean_data$Ecf_Hz)
   clean_data$growth_DN <- as.double(clean_data$growth_DN)
   head(clean_data)

@@ -166,7 +166,8 @@ clean59Data <- function(data,
                                          growth_DN,
                                          nbits,
                                          Ecf_Hz,
-                                         is_record)
+                                         is_record) %>% 
+    dplyr::mutate(nbits = as.double(nbits))
   
   clean_data$Ecf_Hz <- as.double(clean_data$Ecf_Hz)
   clean_data$growth_DN <- as.double(clean_data$growth_DN)
