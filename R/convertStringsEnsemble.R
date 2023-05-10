@@ -125,8 +125,9 @@ convertStringsEnsemble <- function(data,
   } else{
    dati45 <-  ttprocessing::empty45Data
   }
-                   
-                   
+  dati45 <- dplyr::select(dati45, -nbits)                 
+  dati4D <- dplyr::select(dati4D, -nbits)
+  dati59 <- dplyr::select(dati59, -nbits)
   print(dati45)
   print(class(dati45))
   print(dati4D)
