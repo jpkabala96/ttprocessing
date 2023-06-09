@@ -231,7 +231,7 @@ clean59Data <- function(data,
   clean_data$voltage <- 2200*as.double(data4D$adc_vbat)/as.double(data4D$adc_bandgap)#calcolo il voltaggio della batteria
   
   #convert T air (dividing by 10) and clean using the proper function
-  clean_data$Tair <- cleanTAir(as.double(data4D$Tair)/10,
+  clean_data$Tair <- cleanTAir(as.double(data4D$Tair),
                                lower.TAir = lower.TAir,
                                higher.TAir = higher.TAir)  #calcolo la temperatura dell'aria dividendo per 10
   
