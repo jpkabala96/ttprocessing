@@ -11,12 +11,12 @@
 #'   It returns a data.frame, that, besides columns containing information about
 #'   the device ID and time of measurment, contains the following variables:
 #'   \code{do_sap_flow} Sap flux density calculated with the equation by Do et al.
-#'   (2011). It is expressed as l/(m^2*h).
+#'   (2011). It is expressed as g/(m^2*s).
 #'   \code{sap_flow_one_probe} Sap flux density calculated with the equation by 
 #'   Do et al. (2011), by using only one probe (the heating one). It is 
-#'   expressed as l/(m^2*h).
+#'   expressed as g/(m^2*s).
 #'   \code{asgharinia_sap_flow} Sap flux density calculated with the equation provided in 
-#'   Asgharinia et al. (2022). It is expressed as l/(m^2*h).
+#'   Asgharinia et al. (2022). It is expressed as g/(m^2*s).
 #'   \code{Tair} Air temperature in Celsius degrees. 
 #'   \code{Tref0} Temperature of the reference probe at time 0 in Celsius degrees.
 #'   \code{Tref1} Temperature of the reference probe at time 1 in Celsius degrees.
