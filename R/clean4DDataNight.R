@@ -267,7 +267,7 @@ clean4DDataNight <- function(data,
   #yeld negative values
   clean_data$K1 <- ifelse(clean_data$K1 < 0, 0, clean_data$K1)
   #Sap flow according to Do et al. 2011
-  clean_data$do_sap_flow <- 12.95 * clean_data$K1 * 100 #calculate the sap flow using the old formula
+  clean_data$do_sap_flow <- 12.95 * clean_data$K1 * 100 /3.6 #calculate the sap flow using the old formula
   #clean the values obtained
   clean_data$do_sap_flow <- cleanSapFlow(clean_data$do_sap_flow,
                                          lower.sap.flow = lower.sap.flow,
@@ -283,7 +283,7 @@ clean4DDataNight <- function(data,
   #                                              lower.sap.flow = lower.sap.flow,
   #                                              higher.sap.flow = higher.sap.flow)
   #Sap flow according to Asgharinia et al. 2022
-  clean_data$asgharinia_sap_flow <- 100 * ((11.3*clean_data$K1/(1-clean_data$K1))^0.77)
+  clean_data$asgharinia_sap_flow <- (1/3.6) * 100 * ((11.3*clean_data$K1/(1-clean_data$K1))^0.77)
   #implement the cleaning after studying it
   clean_data$asgharinia_sap_flow <- cleanSapFlow(clean_data$asgharinia_sap_flow,
                                          lower.sap.flow = lower.sap.flow,
