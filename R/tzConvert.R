@@ -11,6 +11,11 @@
 
 
 tzConvert <- function(t, tz = Sys.timezone()){
-  result <- as.POSIXct(as.character(lubridate::with_tz(as.POSIXct(t), tz)))
+    step1 <- lubridate::with_tz(t, tz)
+  oryear <- lubridate::year(step1)
+  ormonth <- lubridate::month(step1)
+  ordd <- lubridate::day(step1)
+  orhour <- lubridate::hour(step1)
+  result <- lubridate::make_datetime(oryear, ormonth, ordd, orhour)
   return(result)
 }
