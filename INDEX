@@ -57,7 +57,6 @@ scatterplot                   Scatterplot of the TT variables
 spectralPlot                  TT+ spectral plot
 spectralPlotEnsemble          TT+ spectral plot
 spectralPlotHour              Spectral hourly plot
-stemMoistureIndex             Stem Moisture content
 string45Handling              Function for handling the string 45 data
 string49Handling              Function for cleaning string 49 data
 tabLoading                    Create the UI loading Tab
