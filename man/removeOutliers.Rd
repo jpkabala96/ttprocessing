@@ -16,3 +16,17 @@ Function to be applied to the output of flagOutliers.
   by using the variables that end with _o, containing the flag. Then drops the 
   flag variables from the data.frame.
 }
+\examples{
+\dontrun{
+data("raw4d_ex_data")
+data49 <- string49Handling(raw4d_ex_data)
+data49_flagged <- flagOutliers(data49, timeperiod = "week")#flag the data
+colnames(data49_flagged)
+summary(data49_flagged)
+data49_removed <- removeOutliers(data49_flagged)
+colnames(data49_flagged)
+summary(data49_flagged)
+}
+
+  
+}

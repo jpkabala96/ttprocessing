@@ -20,3 +20,15 @@ This function creates new columns in the TT+ data dataframe,
   applies the boxplot rule. Data are grouped by hour and by week or month,
   and then the function in applied.
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+data_49 <- string49Handling(raw4d_ex_data)
+print(data_49)
+colnames(data_49)
+flagged_data <- flagOutliers(data_49, variables = "DN_450", timeperiod = "week")
+print(flagged_data)
+colnames(flagged_data)
+}
+
+}

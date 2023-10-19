@@ -16,3 +16,20 @@ Joins the string 4D and the string 49 by left join, using the
   \code{dplyr} \code{left_join} function. Joins by id and date_hour of the
   observation.
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+clean_4d <- clean4DData(raw4d_ex_data,
+lower.TTree = 0,
+higher.TTree = 40,
+lower.TAir = -5,
+higher.TAir = 40)
+colnames(clean_4d)
+processed_49 <- string49Handling(raw4d_ex_data)
+colnames(processed_49)
+joined_data <- join4D49(clean_4d, processed_49)
+#joined data contains now both the 49 and 4D data, joined by id
+colnames(joined_data) 
+print(joined_data)
+}
+}

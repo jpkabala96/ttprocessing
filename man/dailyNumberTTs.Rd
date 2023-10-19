@@ -29,3 +29,11 @@ A dataframe with the number of TT with valid data.
 Function that computes the number of TT with valid data per day,
   given the output of the \code{dailyQualityCheck} function output
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+qc_data <- clean4DData(raw4d_ex_data)
+dailyNumberTTs(qc_data)
+}
+
+}

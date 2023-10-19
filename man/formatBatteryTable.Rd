@@ -18,3 +18,8 @@ Formats the battery table returned by \code{fastBatteryCheck}
   for properly displaying it in the GUI. The columns are converted to
   characters.
 }
+\examples{
+#not to be run by the user
+#helper function for the GUI
+
+}

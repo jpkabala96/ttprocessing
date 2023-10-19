@@ -23,3 +23,13 @@ This function makes it easy to filter data by dates
 This function makes use of the \code{dplyr} function \code{filter}
   to filter the data, and returns the filtered data.frame.
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+clean_data <- clean4DData(raw4d_ex_data)
+plotTS(clean_data, statistic = "none")
+filtered_data <- clean_data \%>\% filterByDate("2021-05-15", "2021-05-16")
+plotTS(filtered_data)
+}
+
+}

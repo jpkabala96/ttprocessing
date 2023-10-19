@@ -32,3 +32,13 @@ it.}
 Function for plotting all the data of the same hour during a 
 selected month.
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+data49 <- string49Handling(raw4d_ex_data)
+spectralPlotHour(data49, year = 2021, month = 5, hour = 9, tz = "CET")
+#in the working directory a pdf file, named after the year month and hour 
+#specified by the user should appear
+spectralPlotHour(data49,  year = 2021, month = 5, day = 10, tz = "CET")
+}
+}

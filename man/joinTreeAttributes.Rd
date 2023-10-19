@@ -21,3 +21,23 @@ Function that allows to join the TT+ data with a table of
   id, with the Tree talker id associated with each tree. Can contain an
   arbitrary number of columns of other data.
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+clean_4d <- clean4DData(raw4d_ex_data)
+ids <- unique(clean_4d$id)
+example_ancillary_data <- data.frame(
+id = ids, 
+var1 = rnorm(length(ids), 1,0),
+var2 = runif(length(ids), 10, 30)
+) 
+print(example_ancillary_data)
+colnames(example_ancillary_data)
+join_result <- joinTreeAttributes(clean_4d,
+example_ancillary_data)
+colnames(join_result)
+print(join_result)
+}
+
+
+}

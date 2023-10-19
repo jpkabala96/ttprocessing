@@ -23,3 +23,17 @@ Plot single hours
  @description This function allows the user to plot the tree talker time 
    series as points. Useful while selecting single specific hours.
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+clean_data<- clean4DData(raw4d_ex_data,
+lower.TTree = 0,
+higher.TTree = 40,
+lower.TAir = -5,
+higher.TAir = 40)
+filtered_data <- filterByHour(clean_data, hours = c("11", "12", "13"))
+plotHoursTS(filtered_data, variable = "do_sap_flow", statistic = "none")
+filtered_data2 <- filterByHour(clean_data, hours = c("13"))
+plotHoursTS(filtered_data, variable = "Tair", statistic = "median")
+}
+}

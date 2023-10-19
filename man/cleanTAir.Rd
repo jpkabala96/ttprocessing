@@ -22,3 +22,18 @@ A numeric vector, with non plausible temperature values replaced by NA's.
 Cleans the air temperatures recorded by the Tree Talker, replacing
   with NA's the values outside the range specified by lower.TAir and higher.TAir.
 }
+\examples{
+# Remove temperature values out of range
+#and replace with NA
+#The user doesn't need to call this function
+#as it works embedded in clean4DData
+\dontrun{
+temperature <- sample(c(-20,80), size = 10)
+print(temperature)
+ cleanTAir(temperature, 
+ lower.TAir = -5, 
+ higher.TAir = 35)
+}
+
+
+}

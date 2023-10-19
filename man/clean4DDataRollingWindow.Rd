@@ -103,6 +103,21 @@ This is the main function in this package. Its purpose is to
   \code{Theat1} Temperature of the heating probe at time 0 in Celsius degrees.
   \code{RH} Relative humidity as %.
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+processed_data <- clean4DDataRollingWindow(raw4d_ex_data,
+lower.TTree = 0,
+higher.TTree = 40,
+lower.TAir = -5,
+higher.TAir = 40,
+window.length = 10, 
+tz = "CET")
+colnames(processed_data)
+print(processed_data)
+}
+
+}
 \references{
 Do, F.C.; Isarangkool Na Ayutthaya, S.; Rocheteau, A. Transient thermal dissipation method for xylem sap flow measurement: Implementation with a single probe. Tree Physiol. 2011, 31, 369 380, doi:10.1093/treephys/tpr020.
 

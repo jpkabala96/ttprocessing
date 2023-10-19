@@ -20,3 +20,11 @@ This function retrieves the devices' ids from the first column of
   as a character vector. This function works within the \code{isolateTT()}
   function, but can also be called manually.
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+ids <- obtainId(raw4d_ex_data$V1)
+print(ids)
+}
+
+}

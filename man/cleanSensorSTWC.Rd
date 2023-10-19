@@ -12,9 +12,6 @@ cleanSensorSTWC(x)
 \value{
 A numeric with the data in input, with values outside the range of
   validity replaced by NA.
-  @example
-  STWC_DN <- c(2000, 7800, 8399, 13890, 17900)
-  cleanSensorSTWC(STWC_DN)
 }
 \description{
 The raw stem water content data (the D.N. recorded by the Tree
@@ -22,4 +19,10 @@ The raw stem water content data (the D.N. recorded by the Tree
   to the manual. So values outside this range are removed by this function.
   This function is mainly a helper of \code{clean4DData} but can also
   be called manually by the user while cleaning data by hand.
+}
+\examples{
+  \dontrun{
+  STWC_DN <- c(2000, 7800, 8399, 13890, 17900)
+  cleanSensorSTWC(STWC_DN)
+  }
 }

@@ -20,3 +20,11 @@ The raw DNs from the growth sensor are aggregated weekly,
   Then the highest mode is taken. This value is than converted to measurment
   in cms. For each id the initial value is subtracted to all the values measured.
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+clean_data <- clean4DData(raw4d_ex_data)
+growthElaboration(clean_data, nweeks = 1)
+}
+
+}

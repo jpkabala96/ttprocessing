@@ -39,3 +39,12 @@ Function for creating a spectral plot of the TT+ data. The
   spectral plot is a plot which has on the x axis the wavelength of the bands
   and on the Y axis the energy amount (microWatt/cm^2).
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+data49 <- string49Handling(raw4d_ex_data, tz = "CET")
+spectralPlot(data49, id = "11111111", year = 2021, month = 5, day = 17, hour = 10)
+spectralPlot(data49, id = "22222222", year = 2021, month = 5, day = 18, hour = 9)
+}
+
+}

@@ -19,3 +19,7 @@ Calculates the temperature of the trunk 10 minutes after the
   computed by linear interpolation with Theat0 of the following hour. The procedure 
   allows for correcting for changes in trunk temperature, due to daily cycles.
 }
+\examples{
+# Internal function of the package, the user does not need to call it
+
+}

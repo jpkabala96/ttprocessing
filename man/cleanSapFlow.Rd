@@ -21,3 +21,14 @@ cleanSapFlow cleans the sap flow data, once converted, excluding values that are
 This is mainly a helper function that works inside clean4DData, but can also be used for cleaning the data manually.
 By default the lower value is set to 0, the upper to 300, but the user can set those parameters manually. The values outside this range are set to NA.
 }
+\examples{
+# remove sap flow values outside the range specified by the user
+#and replaces with NA
+\dontrun{
+sap_flow_example <- sample(c(0:1000), size = 20)
+print(sap_flow_example)
+cleanSapFlow(sap_flow_example)
+cleanSapFlow(sap_flow_example, lower.sap.flow = 0, higher.sap.flow = 500)
+}
+
+}

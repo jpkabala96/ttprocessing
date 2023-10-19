@@ -26,3 +26,21 @@ This function facilitates the join of the TT data with other
   The variables in the returned data.frame have the suffix ".TT" for the
   TT variables, and ".data" for the other data Joined.
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+clean_4d <- clean4DData(raw4d_ex_data)
+time_vector <- unique(clean_4d$date_hour)
+external_data_example <- data.frame(
+date_time_column = time_vector,
+variable1 = rnorm(lenght(time_vector, 1,2))
+)
+colnames(external_data_example)
+joined_data <- joinByDateTime(clean_4d, 
+external_data_example,
+datetime_name = "date_time_column")
+colnames(joined_data)
+print(joined_data)
+}
+
+}

@@ -27,3 +27,11 @@ This function cleans the converted Stem Water Content data,
   This is mainly a helper function of \code{clean4DData}, but can also be used for
   handling the data manually.
 }
+\examples{
+# example code
+\dontrun{
+stem_water <- sample(c(1:100), size = 10)
+print(stem_water)
+cleanSTWC(stem_water)
+}
+}

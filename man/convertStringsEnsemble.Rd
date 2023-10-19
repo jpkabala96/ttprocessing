@@ -85,6 +85,16 @@ Wrapper for the clean4DData, string45Handling and clean59Data
   ease the conversion of the TT data in clouds where different types of TT 
   devices are mixed.
 }
+\examples{
+# example code
+\dontrun{
+data(raw45_ex_data)
+data(raw4d_ex_data)
+data(raw59_ex_data)
+convertStringsEnsemble(rbind(rbind(raw45_ex_data, raw4d_ex_data), raw59_ex_data))
+}
+
+}
 \references{
 Do, F.C.; Isarangkool Na Ayutthaya, S.; Rocheteau, A. Transient thermal dissipation method for xylem sap flow measurement: Implementation with a single probe. Tree Physiol. 2011, 31, 369 380, doi:10.1093/treephys/tpr020.
 

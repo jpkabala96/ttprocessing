@@ -15,3 +15,10 @@ Checks the data quality by counting the number of daily
   valid records each day for each tree talker for each variable.
   Returns a data.frame with these data.
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+clean4DData(raw4d_ex_data)
+}
+
+}

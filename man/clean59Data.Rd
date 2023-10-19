@@ -88,17 +88,28 @@ This is the main function in this package. Its purpose is to
   the device ID and time of measurment, contains the following variables:
   \code{do_sap_flow} Sap flux density calculated with the equation by Do et al.
   (2011). It is expressed as g/(m^2*s).
-  \code{sap_flow_one_probe} Sap flux density calculated with the equation by 
-  Do et al. (2011), by using only one probe (the heating one). It is 
-  expressed as l/(m^2*h).
   \code{asgharinia_sap_flow} Sap flux density calculated with the equation provided in 
-  Asgharinia et al. (2022). It is expressed as l/(m^2*h).
+  Asgharinia et al. (2022). It is expressed as g/(m^2*s).
   \code{Tair} Air temperature in Celsius degrees. 
   \code{Tref0} Temperature of the reference probe at time 0 in Celsius degrees.
   \code{Tref1} Temperature of the reference probe at time 1 in Celsius degrees.
   \code{Theat0} Temperature of the heating probe at time 0 in Celsius degrees.
   \code{Theat1} Temperature of the heating probe at time 0 in Celsius degrees.
   \code{RH} Relative humidity as %.
+}
+\examples{
+\dontrun{
+data(raw59_ex_data)
+
+clean59Data(raw59_ex_data)
+
+clean59Data(raw59_ex_data,
+lower.TTree = 0,
+higher.TTree = 40,
+lower.TAir = -5,
+higher.TAir = 40)
+}
+
 }
 \references{
 Do, F.C.; Isarangkool Na Ayutthaya, S.; Rocheteau, A. Transient thermal dissipation method for xylem sap flow measurement: Implementation with a single probe. Tree Physiol. 2011, 31, 369 380, doi:10.1093/treephys/tpr020.

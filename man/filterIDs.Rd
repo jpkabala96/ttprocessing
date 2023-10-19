@@ -15,3 +15,13 @@ filterIDs(data4D, ids = "")
 Function for filtering only certain ids from the dataset. Based 
   on the dplyr::filter().
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+clean_data <- clean4DData(raw4d_ex_data)
+plotTS(clean_data, statistic = "none")
+filtered_data <- clean_data \%>\% filterIDs(ids = "11111111")
+plotTS(filtered_data)
+}
+
+}

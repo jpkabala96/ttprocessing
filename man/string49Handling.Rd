@@ -18,3 +18,14 @@ This function isolates the 49 string, containing light data and
   coefficient to convert DNs to microWatt per squared centimetre.
   The coefficients used are the ones provided by Belelli Marchesini et al.
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+data49 <- string49Handling(raw4d_ex_data)
+print(data49)
+colnames(data49)
+#the data can now be plotted
+spectralPlot(data49, year = 2021, month = 5, day = 17,hour = 9, tz = "CET")
+}
+
+}

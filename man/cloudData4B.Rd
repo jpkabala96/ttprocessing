@@ -17,3 +17,10 @@ A data frame with the 4B data properly organized.
 this function isolates the 4B string, renames its columns,
   retrieves the id and converts the timestamp to date-time.
 }
+\examples{
+\dontrun{
+data(raw45_ex_data)
+cloudData4B(raw45_ex_data)
+}
+
+}

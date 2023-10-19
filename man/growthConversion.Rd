@@ -16,3 +16,11 @@ Converts the growth DN to a measurment in cm according to the
   The sign is reversed, as it indicates the distance of the sensor 
   from the tree, that decreases in time.
 }
+\examples{
+\dontrun{
+growthConversion(34567)
+growthConversion(55609)
+}
+
+
+}

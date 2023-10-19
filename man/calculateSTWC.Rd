@@ -27,3 +27,15 @@ A numeric vector with the % volumetric water content, estimated
 This function calculates the Stem Water Content from the TT data
   Nowdays formulas are available only for Fagus sylvatica and Pinus sylvestris.
 }
+\examples{
+\dontrun{
+#Primarily an internal function of the package
+# Usually the user doesn't need to call it
+  calculateSTWC(
+  Ecf_Hz = 11383,
+  Tref0 = 21.3,
+  species = "Fagus" )
+}
+
+
+}

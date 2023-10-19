@@ -18,3 +18,10 @@ A time vector "POSIXct" with the local time corresponding to the observations
 \description{
 This function converts the time from UTC as recorded by the Tree Talkers to the user's local time. It is used mainly as a helper function in clean4DData(), but can also be used for cleaning the data manually.
 }
+\examples{
+\dontrun{
+example_time <- Sys.time()
+tzConvert(example_time, tz = "UTC")
+}
+
+}

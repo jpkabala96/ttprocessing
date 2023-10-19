@@ -25,3 +25,15 @@ Removes the data for all the days where there are only few
   Might lead to a bad estimation of the Sap Flow.
   Can be applied also to the other columns.
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+clean_data <- clean4DData(raw4d_ex_data)
+h24_cleaned1 <- h24Clean(clean_data)
+View(h24_cleaned1)
+h24_cleaned2 <- h24Clean(clean_data, variables = c("do_sap_flow", "Tair"))
+View(h24_cleaned2)
+}
+
+
+}

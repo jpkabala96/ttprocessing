@@ -35,3 +35,18 @@ Function for plotting the assessment of the functioning of
   \code{deviceFunctioningAssesment}. Can take a character containing the ids
   to assess, and creates an ensemble plot.
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+clean_data <- clean4DData(raw4d_ex_data,
+lower.TTree = 0,
+higher.TTree = 40,
+lower.TAir = -5,
+higher.TAir = 40)
+plot_object <- plotDeviceFunctioning(clean_data,
+ids = unique(clean_data$id), 
+start_date = "2021-05-10",
+end_date = "2021-05-20")
+print(plot_object)
+}
+}

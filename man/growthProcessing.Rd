@@ -19,3 +19,7 @@ This function processes the 4D data by a simplified procedure,
 This function will be united to \code{clean4DData} when we come to
   a definitive version of the processing to be done to the growth data.
 }
+\examples{
+# Function not to be called by the user
+
+}

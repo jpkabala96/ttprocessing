@@ -27,3 +27,15 @@ an object of class "tbl" , "data.table", "data.frame"
 \description{
 Uses the fread function from data.table package with arguments set properly
 }
+\examples{
+\dontrun{
+ library(readr)
+ data(raw4d_ex_data)
+ #create a local file with data
+ write_csv2(raw4d_ex_data, file = "filename.txt", col_names = F)
+ #read the data from the created file
+ rawTTdata <- readTTData("path to filename.txt")#replace with the file path
+ print(rawTTdata)
+}
+
+}

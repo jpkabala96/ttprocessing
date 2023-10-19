@@ -11,3 +11,28 @@ This function launches a shiny GUI for the package, that
   allows the user to clean, explore, plot and download the TT data.
   This function is designed to deal with all 4D, 45, and 59 strings.
 }
+\examples{
+\dontrun{
+ # example code
+ # The GUI can read TT+ data from a remote or local txt file. 
+ #the txt file has to be formatted the same way as the TT+ data in the server.
+ # to try it, the txt files with TT+ can be used from the github repository of 
+ # this package.
+ # If not, the example data can be saved to a local csv file 
+ library(readr)
+ data(raw59_ex_data)
+ data(raw45_ex_data)
+ #create a local file with data
+ write_csv2(raw59_ex_data, file = "filename.txt", col_names = F)
+ write_csv2(raw45_ex_data, file = "otherfilename.txt", col_names = F)
+ # after launching the GUI, the path to the file created with write_csv2
+ #has to be put as text input in the first panel, and then the data loading
+ #button has to be pressed
+ #after the data appear, they can be processed in the data cleaning tab
+ #they can be saved to CSV, or plotted within the plotting tabs.
+ launchNewGUI()
+ 
+
+}
+
+}

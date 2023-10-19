@@ -18,3 +18,10 @@ Converts the temperature measured inside the trunk from DN to Celsius
  using the lookup table of the instrument, that contains, for each possible 
  digital number, the corresponding temperature value.
 }
+\examples{
+\dontrun{
+convertTemperature(31124)
+convertTemperature(38987)
+}
+
+}

@@ -31,3 +31,16 @@ This function is a wrapper around ggplot, to display
 The summary statistic is calculated with na.rm = T, as it is very
   likely that the data will contain NA.
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+clean_data <- clean4DData(raw4d_ex_data,
+lower.TTree = 0,
+higher.TTree = 40,
+lower.TAir = -5,
+higher.TAir = 40)
+plotByMH(clean_data, variable = "do_sap_flow")
+plotByMH(clean_data, variable = "Tair", statistic = "mean")
+}
+
+}

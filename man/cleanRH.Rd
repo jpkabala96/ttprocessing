@@ -23,3 +23,12 @@ This function removes the relative humidity values outside the
   lowest value and 95 as highest value accepted. Values not accepted are
   changed to NA.
 }
+\examples{
+# Remove values outside the range specified by the user.
+\dontrun{
+rh_example <- sample(c(1:130), size = 10)
+print(rh_example)
+cleanRH(rh_example, lower.RH = 10, higher.RH = 99)
+}
+
+}

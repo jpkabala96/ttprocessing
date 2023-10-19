@@ -27,3 +27,18 @@ For the purpose of measuring the sap flow, temperature is measured
   of temperature he regards as acceptable. Values outside the range are replaced
   with NA.
 }
+\examples{
+#The user doesn't need to call this function by his own
+#as this already works inside the main functions
+#(clean4DData, clean59Data, string45Handling)
+\dontrun{
+
+temperature <- sample(c(-20,70), size = 10)
+print(temperature)
+ cleanTemperatureTree(temperature, 
+ lower.TTree = 0, 
+ higher.TTree = 35)
+}
+
+
+}

@@ -23,7 +23,29 @@ The default is "median".}
 
 \item{lat}{Latitude at which is located the study site (in degrees).}
 
-\item{lon}{Longitude at which is located the study site (in degrees).}
+\item{lon}{Longitude at which is located the study site (in degrees).
+
+#' @examples
+\dontrun{
+data(raw4d_ex_data)
+clean_data<- clean4DData(raw4d_ex_data,
+lower.TTree = 0,
+higher.TTree = 40,
+lower.TAir = -5,
+higher.TAir = 40)
+filtered_data <- filterByDate(clean_data, "2021-05-10", "2021-05-20")
+plotWithShade(filtered_data, 
+variable = "Tair", 
+statistic = "mean",
+lat = 40, #when working with your data place correct values of latitude
+lon = 14) #and longitude of your study site
+
+plotWithShade(filtered_data, 
+variable = "do_sap_flow", 
+statistic = "none",
+lat = 40, #when working with your data place correct values of latitude
+lon = 14) #and longitude of your study site
+}}
 }
 \description{
 Plots the timeseries of TT+ data with nights shaded, by using

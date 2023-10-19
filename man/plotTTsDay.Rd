@@ -20,3 +20,12 @@ Function to graphically display the output of
   available for that day with complete observations of the variable of 
   interest.
 }
+\examples{
+\dontrun{
+data(raw4d_ex_data)
+qc_data <- clean4DData(raw4d_ex_data)
+nttsdaily <- dailyNumberTTs(qc_data)
+plotTTsDay(nttsdaily, print = T)
+}
+
+}

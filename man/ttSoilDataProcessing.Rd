@@ -67,9 +67,24 @@ Table with equation coefficients that are used in the equations.\tabular{lcccccc
    S1 \tab 50000 \tab 1.622 \tab -5.6 \tab 830 \tab 3.08x10^-7 \tab -0.005394 \tab 26 \cr
    S2 \tab 50000 \tab 1.194 \tab -5.6 \tab 830 \tab 1.30x10^-8 \tab -0.0009713 \tab 31 \cr
    S3 \tab 3000000 \tab 0.669 \tab -758 \tab 154844 \tab 1.9x10^-11 \tab -6.16x10^-5 \tab 59 \cr
-   S4 \tab 50000 \tab 1.221 \tab -758 \tab 154844 \tab 6.4x10^-12 \tab -1.93x10^-5 \tab 49 \cr
-   S5 \tab 50000 \tab 0.9708 \tab -758 \tab 154844 \tab 7.1x10^-12 \tab -1.78x10^-5 \tab 17 \cr
-   S6 \tab 50000 \tab 0.871 \tab -758 \tab 154844 \tab 5.7x10^-10 \tab -0.0003022 \tab 53 \cr
-   S7 \tab 50000 \tab 0.3866 \tab -758 \tab 154844 \tab 1.68x10^-9 \tab -0.000521 \tab 41 \cr
+   S4 \tab 3000000 \tab 1.221 \tab -758 \tab 154844 \tab 6.4x10^-12 \tab -1.93x10^-5 \tab 49 \cr
+   S5 \tab 3000000 \tab 0.9708 \tab -758 \tab 154844 \tab 7.1x10^-12 \tab -1.78x10^-5 \tab 17 \cr
+   S6 \tab 3000000 \tab 0.871 \tab -758 \tab 154844 \tab 5.7x10^-10 \tab -0.0003022 \tab 53 \cr
+   S7 \tab 3000000 \tab 0.3866 \tab -758 \tab 154844 \tab 1.68x10^-9 \tab -0.000521 \tab 41 \cr
 }
+}
+\examples{
+\dontrun{
+raw_data <- readTTdata("path or link to the data")
+#run the function on the raw data, and select the proper equation,
+#based on the bulk density of the soil, and on the frequency of the probe
+#supported by your device
+ttsoil_processed_data  <- ttSoilDataProcessing(raw_data,
+string_type = "4D", equation = "S1") \%>\%
+ filterIDs("id of the TT-soil")
+print(ttsoil_processed_data)
+colnames(ttsoil_processed_data)
+}
+
+
 }

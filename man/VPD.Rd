@@ -17,3 +17,12 @@ This function calculates Vapour Pressure Deficit using the air
   temperature and relative humidity data recorded by the Tree Talker. It takes
   as input two numeric vectors.
 }
+\examples{
+\dontrun{
+#compute the VPD from temperature and air humidity
+VPD(Tair = 10, RH = 50)
+VPD(Tair = 20, RH = 80)
+}
+
+
+}
