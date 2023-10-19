@@ -7,6 +7,17 @@
 #' @param statistic \code{"median"} or \code{"mean"}. Defaults to median. The
 #'   statistic to be plotted.
 #' @return A ggplot object. Additional layers can be added to it.
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' clean_data <- clean4DData(raw4d_ex_data,
+#' lower.TTree = 0,
+#' higher.TTree = 40,
+#' lower.TAir = -5,
+#' higher.TAir = 40)
+#' plotByQuarter(clean_data, variable = "do_sap_flow")
+#' plotByQuarter(clean_data, variable = "Tair", statistic = "mean")
+#' }
 #' @export
 #'
 

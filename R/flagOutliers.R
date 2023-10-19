@@ -7,6 +7,17 @@
 #' @param variables Variables to which to apply the function.
 #' @param timeperiod Flag (\code{"month" or "week" or "all"}). if TRUE data are grouped by week, 
 #'   else are grouped by month for applying the procedure. 
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' data_49 <- string49Handling(raw4d_ex_data)
+#' print(data_49)
+#' colnames(data_49)
+#' flagged_data <- flagOutliers(data_49, variables = "DN_450", timeperiod = "week")
+#' print(flagged_data)
+#' colnames(flagged_data)
+#' }
+#' 
 #' @export
 #' 
 

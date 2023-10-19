@@ -12,6 +12,13 @@
 #' @param tz The time zone of the place where the TT+ are installed. Default
 #'   value: \code{Sys.timezone} the system timezone.
 #' @param print a flag, set TRUE to print the plot, FALSE to only return it
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' data49 <- string49Handling(raw4d_ex_data, tz = "CET")
+#' spectralPlot(data49, id = "11111111", year = 2021, month = 5, day = 17, hour = 10)
+#' spectralPlot(data49, id = "22222222", year = 2021, month = 5, day = 18, hour = 9)
+#' }
 #' 
 #' @export
 #' 

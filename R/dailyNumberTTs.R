@@ -10,6 +10,13 @@
 #' @param min_valid_obs Numeric, minimum of valid observations per day required
 #'   for each device, to consider its data valid. Default value \code{24}.
 #' @return A dataframe with the number of TT with valid data.
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' qc_data <- clean4DData(raw4d_ex_data)
+#' dailyNumberTTs(qc_data)
+#' }
+#' 
 #' @export
 #' 
 dailyNumberTTs <- function(qcdata, 

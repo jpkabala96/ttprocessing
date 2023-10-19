@@ -5,6 +5,13 @@
 #'   The sign is reversed, as it indicates the distance of the sensor 
 #'   from the tree, that decreases in time. 
 #' @param growthDN The raw value from the growth sensor (the DN). A numeric.
+#' @examples
+#' \dontrun{
+#' growthConversion(34567)
+#' growthConversion(55609)
+#' }
+#' 
+#' 
 #' @export
 
 

@@ -7,6 +7,19 @@
 #'   from the data. Data are grouped by date.
 #'   Can be "median", "mean" or "none". If "none" the data of all the tree 
 #'   talkers are displayed.
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' clean_data<- clean4DData(raw4d_ex_data,
+#' lower.TTree = 0,
+#' higher.TTree = 40,
+#' lower.TAir = -5,
+#' higher.TAir = 40)
+#' filtered_data <- filterByHour(clean_data, hours = c("11", "12", "13"))
+#' plotHoursTS(filtered_data, variable = "do_sap_flow", statistic = "none")
+#' filtered_data2 <- filterByHour(clean_data, hours = c("13"))
+#' plotHoursTS(filtered_data, variable = "Tair", statistic = "median")
+#' }
 #' @export
 
 plotHoursTS <- function(data,

@@ -6,6 +6,15 @@
 #'   The coefficients used are the ones provided by Belelli Marchesini et al.
 #' @param raw_data Raw data as those downloaded with readTTData.
 #' @param time_zone Time zone to be used. Defaults to Sys.timezone().
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' data49 <- string49Handling(raw4d_ex_data)
+#' print(data49)
+#' colnames(data49)
+#' #the data can now be plotted
+#' spectralPlot(data49, year = 2021, month = 5, day = 17,hour = 9, tz = "CET")
+#' }
 #'
 #' @export
 #'

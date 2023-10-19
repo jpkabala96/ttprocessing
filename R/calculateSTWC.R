@@ -13,6 +13,16 @@
 #'   raises an error.
 #' @return A numeric vector with the % volumetric water content, estimated
 #'   according to the equations in the TT+ manual.
+#' @examples
+#' \dontrun{
+#' #Primarily an internal function of the package
+#' # Usually the user doesn't need to call it
+#'   calculateSTWC(
+#'   Ecf_Hz = 11383,
+#'   Tref0 = 21.3,
+#'   species = "Fagus" )
+#' }
+#' 
 #'
 #'@export
 

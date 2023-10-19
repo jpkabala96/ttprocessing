@@ -2,6 +2,15 @@
 #' @description Allows the user to check the battery level of the devices
 #'   and the last time they sent a string.
 #' @param raw_data The raw data obtained from \code{readTTdata}
+#' 
+#' @examples
+#' \dontrun{
+#' # example battery check
+#' data(raw4d_ex_data)
+#' batteryCheck(raw4d_ex_data)
+#' }
+#' 
+#' 
 #'
 #' @export
 

@@ -15,7 +15,17 @@
 #'   likely that the data will contain NA.
 #' @return a ggplot object, that can be further customized.
 #'
-#'
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' clean_data <- clean4DData(raw4d_ex_data,
+#' lower.TTree = 0,
+#' higher.TTree = 40,
+#' lower.TAir = -5,
+#' higher.TAir = 40)
+#' plotByMH(clean_data, variable = "do_sap_flow")
+#' plotByMH(clean_data, variable = "Tair", statistic = "mean")
+#' }
 #'
 #'@export
 

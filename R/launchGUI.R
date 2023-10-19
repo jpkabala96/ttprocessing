@@ -2,6 +2,29 @@
 #'
 #' @description This function launches a shiny GUI for the package, that
 #'   allows the user to clean, explore, plot and download the TT data.
+#' @examples
+#' \dontrun{
+#'  # example code
+#'  # The GUI can read TT+ data from a remote or local txt file. 
+#'  #the txt file has to be formatted the same way as the TT+ data in the server.
+#'  # to try it, the txt files with TT+ can be used from the github repository of 
+#'  # this package.
+#'  # If not, the example data can be saved to a local csv file 
+#'  library(readr)
+#'  data(raw4d_ex_data)
+#'  #create a local file with data
+#'  write_csv2(raw4d_ex_data, file = "filename.txt", col_names = F)
+#'  # after launching the GUI, the path to the file created with write_csv2
+#'  #has to be put as text input in the first panel, and then the data loading
+#'  #button has to be pressed
+#'  #after the data appear, they can be processed in the data cleaning tab
+#'  #they can be saved to CSV, or plotted within the plotting tabs.
+#'  launchGUI()
+#'  
+#' 
+#' }
+#'
+#' 
 #' @export
 
 
@@ -55,14 +78,14 @@ launchGUI <- function(){
                                               selected = "1"),
 
                           shiny::textInput("LinkServer1",
-                                           label = "Link al server",
-                                           value = "link to your tt-cloud"),
+                                           label = "Link to the server or local file",
+                                           value = "link to your tt-cloud or filepath"),
 
                           shiny::textInput("LinkServer2",
-                                           label = "link al vecchio server",
-                                           value = "link to another tt-cloud"),
+                                           label = "Link to another server or local file",
+                                           value = "link to another tt-cloud or filepath"),
 
-                          shiny::actionButton("carica", "carica i dati"),
+                          shiny::actionButton("carica", "load the data"),
 
                           shiny::textInput("raw_data_name", "Dataset name"),
 

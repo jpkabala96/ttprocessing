@@ -11,8 +11,18 @@
 #' @param x Stem Water Content data converted to percentage.
 #' @param lower.VWC Lowest STWC value accepted. Defaults to 0.
 #' @param higher.VWC Highest STWC value accepted. Defaults to 100.
+#' 
 #' @return Stem water content: a numeric with values below \code{lower.STWC} and above
 #' \code{higher.STWC} replaced with NA.
+#' 
+#' @examples
+#' # example code
+#' \dontrun{
+#' stem_water <- sample(c(1:100), size = 10)
+#' print(stem_water)
+#' cleanSTWC(stem_water)
+#' }
+#' @export
 
 
 

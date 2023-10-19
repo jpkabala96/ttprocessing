@@ -11,6 +11,13 @@
 #'   value: \code{Sys.timezone} the system timezone.
 #' @param print a flag, set TRUE to print the plot, FALSE to only return it
 #' 
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' data49 <- string49Handling(raw4d_ex_data)
+#' spectralPlotEnsemble(data49, year = 2021, month = 5, day = 17, tz = "CET")
+#' spectralPlotEnsemble(data49,  year = 2021, month = 5, day = 18, tz = "CET")
+#' }
 #' @export
 #' @import ggpubr
 #' 

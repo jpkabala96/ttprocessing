@@ -6,6 +6,15 @@
 #' @param TTdaydata The dataframe output by the \code{dailyNumberTTs} function.
 #' @param print Default value = \code{TRUE}
 #' @return A ggplot object
+#' 
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' qc_data <- clean4DData(raw4d_ex_data)
+#' nttsdaily <- dailyNumberTTs(qc_data)
+#' plotTTsDay(nttsdaily, print = T)
+#' }
+#' 
 #' @export
 #' 
 plotTTsDay <- function(TTdaydata, print = TRUE){

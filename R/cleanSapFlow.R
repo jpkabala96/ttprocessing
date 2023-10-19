@@ -7,6 +7,17 @@
 #' @param lower.sap.flow The lowest value accepted (defaults to 0)
 #' @param higher.sap.flow The highest value accepted (defaults to 300)
 #' @return A numeric vector with the invalid values replaced by NA's
+#' 
+#' @examples
+#' # remove sap flow values outside the range specified by the user
+#' #and replaces with NA
+#' \dontrun{
+#' sap_flow_example <- sample(c(0:1000), size = 20)
+#' print(sap_flow_example)
+#' cleanSapFlow(sap_flow_example)
+#' cleanSapFlow(sap_flow_example, lower.sap.flow = 0, higher.sap.flow = 500)
+#' }
+#' 
 
 #' @export
 

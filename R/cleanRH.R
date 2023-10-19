@@ -9,6 +9,15 @@
 #' @param lower.RH Values lower than this are changed to NA. Defaults to 35.
 #' @param higher.RH Values higher than this are changed to NA. Defaults to 95.
 #' @return A "numeric".
+#' 
+#' @examples
+#' # Remove values outside the range specified by the user.
+#' \dontrun{
+#' rh_example <- sample(c(1:130), size = 10)
+#' print(rh_example)
+#' cleanRH(rh_example, lower.RH = 10, higher.RH = 99)
+#' }
+#' 
 #' @export
 
 

@@ -7,6 +7,9 @@
 #' @param data Data of a single TT+ devices, arranged by \code{date_hour}.
 #' @return The same data.frame as data, plus a column called \code{Theat10} 
 #'   containing the estimated value.
+#' @examples
+#' # Internal function of the package, the user does not need to call it
+#' 
 #' @export
 #' 
 calculateTheat10 <- function(data){

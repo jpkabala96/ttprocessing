@@ -8,6 +8,23 @@
 #'   4d data column id. 
 #' @param start_date Date of start of the time frame of interest.
 #' @param end_date Date of end of the time frame of interest.
+#' @param min_valid_obs Minimum valid observations of each variable to label the 
+#' data of the corresponding date as ok (and display in green color)
+#'   
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' clean_data <- clean4DData(raw4d_ex_data)
+#' assessment_plot <- deviceFunctioningAssessment(
+#' clean_data,
+#' id = "11111111",
+#' start_date = "2021-05-07",
+#' end_date = "2021-05-20",
+#' min_valid_obs = 23)
+#' #the plot has can be printed
+#' print(assessment_plot)
+#' }
+#' 
 #' @export
 #' 
 

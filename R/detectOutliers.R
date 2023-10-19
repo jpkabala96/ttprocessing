@@ -9,6 +9,15 @@
 #'   returns a logical vector containing that flags (T means a value is an 
 #'   outlier, F means it's not an outlier).
 #' @param x A numeric vector
+#' 
+#' @examples
+#' \dontrun{
+#' 
+#' example_data <- rnorm(100, 2,3)
+#' detectOutliers(example_data)
+#' 
+#' }
+#' 
 #' @return A logical vector containing the flags.
 
 

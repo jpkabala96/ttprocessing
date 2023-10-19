@@ -5,7 +5,13 @@
 #' @param Tair A numeric vector containing the Tair values
 #' @param RH A numeric vector containing relative humidity data. Must be the same length
 #'   as Tair.
-#'
+#' @examples
+#' \dontrun{
+#' #compute the VPD from temperature and air humidity
+#' VPD(Tair = 10, RH = 50)
+#' VPD(Tair = 20, RH = 80)
+#' }
+#' 
 #'
 #' @export
 #'

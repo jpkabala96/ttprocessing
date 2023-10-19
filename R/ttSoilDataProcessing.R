@@ -43,6 +43,18 @@
 #' | S7       | 3000000       | 0.3866            | -758             | 154844            | 1.68x10^-9 |-0.000521  |41     |
 #' @md
 #'   
+#' @examples
+#' \dontrun{
+#' raw_data <- readTTdata("path or link to the data")
+#' #run the function on the raw data, and select the proper equation,
+#' #based on the bulk density of the soil, and on the frequency of the probe
+#' #supported by your device
+#' ttsoil_processed_data  <- ttSoilDataProcessing(raw_data,
+#' string_type = "4D", equation = "S1") %>%
+#'  filterIDs("id of the TT-soil")
+#' print(ttsoil_processed_data)
+#' colnames(ttsoil_processed_data)
+#' }
 #' 
 #' 
 #' @export

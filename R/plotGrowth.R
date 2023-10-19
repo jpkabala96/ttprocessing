@@ -8,6 +8,16 @@
 #'   "growth_s0", "growth_mode_cm".
 #' @param theme The theme to be used for the plot. One of: "bw", "classic",
 #'   "grey" or "light" to select the corresponding ggplot theme.
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' clean_data <- clean4DData(raw4d_ex_data)
+#' growth_data <- growthElaboration(clean_data, nweeks = 1)
+#' plotGrowth(growth_data, variable = "growth_s0", theme = "grey")
+#' plotGrowth(growth_data, variable = "growth_mode_r", theme = "grey")
+#' }
+#'    
+#'
 #' @export
 #'
 

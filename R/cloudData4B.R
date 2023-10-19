@@ -5,6 +5,13 @@
 #' @param raw_data The raw Tree Talkers data, as those obtained by the readTTData
 #'   function.
 #' @return A data frame with the 4B data properly organized.
+#' 
+#' @examples
+#' \dontrun{
+#' data(raw45_ex_data)
+#' cloudData4B(raw45_ex_data)
+#' }
+#' 
 #' @export
 
 cloudData4B <- function(raw_data){

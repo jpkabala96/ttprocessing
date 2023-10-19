@@ -8,6 +8,13 @@
 #' @param nweeks The number of consecutive weeks to aggregate together. Must be
 #'   1, 2 or 3. The function might accept also higher values, but we don't
 #'   recommend to use them as the procedure has not been tested for those values.
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' clean_data <- clean4DData(raw4d_ex_data)
+#' growthElaboration(clean_data, nweeks = 1)
+#' }
+#' 
 #' @export
 
 growthElaboration <- function(data4d, nweeks){

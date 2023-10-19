@@ -13,6 +13,22 @@
 #'   other data.
 #' @return A data.frame, with the joined data.
 #'
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' clean_4d <- clean4DData(raw4d_ex_data)
+#' time_vector <- unique(clean_4d$date_hour)
+#' external_data_example <- data.frame(
+#' date_time_column = time_vector,
+#' variable1 = rnorm(lenght(time_vector, 1,2))
+#' )
+#' colnames(external_data_example)
+#' joined_data <- joinByDateTime(clean_4d, 
+#' external_data_example,
+#' datetime_name = "date_time_column")
+#' colnames(joined_data)
+#' print(joined_data)
+#' }
 #'
 #' @export
 

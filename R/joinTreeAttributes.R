@@ -9,6 +9,24 @@
 #'   a column id with the TT ids.
 #'   @return A joined data.frame, with suffix .TT on the columns from the TT data,
 #'   and suffix .tree on the columns from the tree attributes.
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' clean_4d <- clean4DData(raw4d_ex_data)
+#' ids <- unique(clean_4d$id)
+#' example_ancillary_data <- data.frame(
+#' id = ids, 
+#' var1 = rnorm(length(ids), 1,0),
+#' var2 = runif(length(ids), 10, 30)
+#' ) 
+#' print(example_ancillary_data)
+#' colnames(example_ancillary_data)
+#' join_result <- joinTreeAttributes(clean_4d,
+#' example_ancillary_data)
+#' colnames(join_result)
+#' print(join_result)
+#' }
+#' 
 #'
 #' @export
 

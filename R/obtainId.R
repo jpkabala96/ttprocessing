@@ -8,6 +8,13 @@
 #' @param x The string V1 of the tree talkers data, that contains the server
 #'   date-time and the id of the Tree Talker.
 #' @return A character vector with the devices' ids.
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' ids <- obtainId(raw4d_ex_data$V1)
+#' print(ids)
+#' }
+#' 
 #' @export
 
 

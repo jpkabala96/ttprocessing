@@ -47,7 +47,15 @@
 #' @references Do, F.C.; Isarangkool Na Ayutthaya, S.; Rocheteau, A. Transient thermal dissipation method for xylem sap flow measurement: Implementation with a single probe. Tree Physiol. 2011, 31, 369 380, doi:10.1093/treephys/tpr020.
 #' 
 #'   Asgharinia, S., Leberecht, M., Belelli Marchesini, L., Friess, N., Gianelle, D., Nauss, T., ... & Valentini, R. (2022). Towards Continuous Stem Water Content and Sap Flux Density Monitoring: IoT-Based Solution for Detecting Changes in Stem Water Dynamics. Forests, 13(7), 1040.
-#'   
+#' @examples
+#' # example code
+#' \dontrun{
+#' data(raw45_ex_data)
+#' data(raw4d_ex_data)
+#' data(raw59_ex_data)
+#' convertStringsEnsemble(rbind(rbind(raw45_ex_data, raw4d_ex_data), raw59_ex_data))
+#' }
+#' 
 #' @export
 
 

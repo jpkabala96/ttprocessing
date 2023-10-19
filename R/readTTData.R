@@ -9,6 +9,17 @@
 #'   timestamp allowed in the data. Strings with higher timestamp values will be
 #'   discarded. Default value: \code{Sys.Date() + as.difftime(1, units = "days")}.
 #' @returns an object of class "tbl" , "data.table", "data.frame"
+#' 
+#' @examples
+#' \dontrun{
+#'  library(readr)
+#'  data(raw4d_ex_data)
+#'  #create a local file with data
+#'  write_csv2(raw4d_ex_data, file = "filename.txt", col_names = F)
+#'  #read the data from the created file
+#'  rawTTdata <- readTTData("path to filename.txt")#replace with the file path
+#'  print(rawTTdata)
+#' }
 #'
 #' @export
 #'

@@ -12,6 +12,20 @@
 #' @param min_valid_obs The number of valid observations required for each 
 #'   variable to consider the data valid. Default value = \code{24}.
 #' @return A ggplot object.
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' clean_data <- clean4DData(raw4d_ex_data,
+#' lower.TTree = 0,
+#' higher.TTree = 40,
+#' lower.TAir = -5,
+#' higher.TAir = 40)
+#' plot_object <- plotDeviceFunctioning(clean_data,
+#' ids = unique(clean_data$id), 
+#' start_date = "2021-05-10",
+#' end_date = "2021-05-20")
+#' print(plot_object)
+#' }
 #' @export
 #' 
 #' 

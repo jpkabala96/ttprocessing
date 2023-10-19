@@ -13,6 +13,20 @@
 #' @param lower.TTree A value for the lowest temperature value accepted.
 #' @param higher.TTree A value for the highest temperature value accepted.
 #' @return A numeric vector, with values outside the range replaced with NA's.
+#' @examples
+#' #The user doesn't need to call this function by his own
+#' #as this already works inside the main functions
+#' #(clean4DData, clean59Data, string45Handling)
+#' \dontrun{
+#' 
+#'temperature <- sample(c(-20,70), size = 10)
+#' print(temperature)
+#'  cleanTemperatureTree(temperature, 
+#'  lower.TTree = 0, 
+#'  higher.TTree = 35)
+#' }
+#' 
+#' 
 #' @export
 
 

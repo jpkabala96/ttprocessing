@@ -6,6 +6,12 @@
 #' @param tz Defaults to the timezone set on the device used.
 #' Can be set manually to any timezone accepted by lubridate
 #' @return A time vector "POSIXct" with the local time corresponding to the observations
+#' @examples
+#' \dontrun{
+#' example_time <- Sys.time()
+#' tzConvert(example_time, tz = "UTC")
+#' }
+#' 
 #' @export
 
 

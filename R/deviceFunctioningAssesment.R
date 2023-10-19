@@ -13,6 +13,22 @@
 #'   while if not it is colored in red in the output plot. 
 #' @return A ggplot object, the plot with the graphical assesment of the functioning
 #'   of the device corresponding to that ID. 
+#'   
+#'   
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' clean_data <- clean4DData(raw4d_ex_data)
+#' assessment_plot <- deviceFunctioningAssessment(
+#' clean_data,
+#' id = "11111111",
+#' start_date = "2021-05-07",
+#' end_date = "2021-05-20",
+#' min_valid_obs = 23)
+#' #the plot has can be printed
+#' print(assessment_plot)
+#' }
+#' 
 #' @export
 #' 
 

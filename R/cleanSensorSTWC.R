@@ -7,9 +7,11 @@
 #' @param x Data recorded by the Stem Water Content sensor of the Tree Talker. A numeric.
 #' @return A numeric with the data in input, with values outside the range of
 #'   validity replaced by NA.
-#'   @example
+#' @examples
+#'   \dontrun{
 #'   STWC_DN <- c(2000, 7800, 8399, 13890, 17900)
 #'   cleanSensorSTWC(STWC_DN)
+#'   }
 #' @export
 
 

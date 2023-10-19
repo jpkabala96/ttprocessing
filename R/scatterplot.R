@@ -9,7 +9,23 @@
 #' @param x_label The label to be put on the x axis
 #' @param y_label The label to be put on the y axis
 #'
-#'
+#' @examples
+#' \dontrun{
+#' data("raw4d_ex_data")
+#' clean_data <- clean4DData(raw4d_ex_data)
+#' scatterplot(clean_data, 
+#' variable1 = "Tair", 
+#' variable2 = "do_sap_flow",
+#' theme = "grey", 
+#' plot_title = "Sap flow against temperature"
+#'  )
+#' scatterplot(clean_data, 
+#' variable1 = "vpd", 
+#' variable2 = "do_sap_flow",
+#' theme = "grey", 
+#' plot_title = "Sap flow against vpd"
+#'  )
+#' }
 #' @export
 
 

@@ -14,9 +14,18 @@
 #'   for the TT data, as a robust indicator.
 #' @param variable A chararacter string which specifies a valid variable
 #'   name in the data data.frame supplied to the function.
-
-#'
-#'
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' clean_data<- clean4DData(raw4d_ex_data,
+#' lower.TTree = 0,
+#' higher.TTree = 40,
+#' lower.TAir = -5,
+#' higher.TAir = 40)
+#' plotTS(clean_data, variable = "Tair", statistic = "median")
+#' filtered_data <- filterByDate(clean_data, "2021-05-10", "2021-05-20")
+#' plotTS(filtered_data, variable = "do_sap_flow", statistic = "none")
+#' }
 #'@export
 #'
 

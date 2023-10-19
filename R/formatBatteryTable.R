@@ -6,7 +6,10 @@
 #' @param battery_table The battery table (the output of fastBatteryCheck)
 #' @return The battery table properly formatted, with all columns converted
 #'   to character.
-#'
+#' @examples
+#' #not to be run by the user
+#' #helper function for the GUI
+#' 
 #' @export
 
 formatBatteryTable <- function(battery_table){

@@ -5,6 +5,12 @@
 #'   Returns a data.frame with these data.
 #' @param TTdata4d Dataframe with Tree talker 4D data, such as the one produced
 #'   by \code{clean4DData}. 
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' clean4DData(raw4d_ex_data)
+#' }
+#' 
 #'@export
 
 

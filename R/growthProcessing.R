@@ -6,6 +6,9 @@
 #' @param raw_data The raw data downloaded with the \code{readTTData} function.
 #' @details This function will be united to \code{clean4DData} when we come to
 #'   a definitive version of the processing to be done to the growth data.
+#' @examples
+#' # Function not to be called by the user
+#' 
 #' @export
 
 

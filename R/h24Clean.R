@@ -12,6 +12,18 @@
 #' @param complete_required Complete observations during the day, to retain the
 #'   values recorded during that day. Defaults to 24 (all the records during
 #'    that day must be complete to retain the data of that day)
+#'    
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' clean_data <- clean4DData(raw4d_ex_data)
+#' h24_cleaned1 <- h24Clean(clean_data)
+#' View(h24_cleaned1)
+#' h24_cleaned2 <- h24Clean(clean_data, variables = c("do_sap_flow", "Tair"))
+#' View(h24_cleaned2)
+#' }
+#' 
+#' 
 #' @importFrom rlang na_dbl
 #' @import suncalc
 #'

@@ -4,6 +4,20 @@
 #' @param link_string Link to the cloud for which the battery levels are to be
 #'   checked.
 #' @param ndays_ago Number of days ago to consider. Defaults to \code{60}.
+#' 
+#' @examples
+#' #Function for fastly checking the battery level of the data
+#' #can be tested by saving the example data of this package to a local file
+#' #through
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' write_csv2(raw4d_ex_data,
+#' file = "example_file.txt",
+#' col_names = F)
+#' fastBatteryCheck("example_file.txt",
+#' ndays_ago = 1000)
+#' }
+#' 
 #'
 #'@export
 

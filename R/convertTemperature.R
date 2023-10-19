@@ -6,6 +6,12 @@
 #'  digital number, the corresponding temperature value. 
 #' @param x A numeric vector containing the DN of the trunk temperature measurment.
 #' @return A numeric vector with the temperatures expressed as Celsius degrees.
+#' @examples
+#' \dontrun{
+#' convertTemperature(31124)
+#' convertTemperature(38987)
+#' }
+#' 
 #'@export
 #'
 convertTemperature <- function(x){

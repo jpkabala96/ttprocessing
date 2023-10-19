@@ -4,6 +4,22 @@
 #'   observation.
 #' @param data4D The 4d data data.frame.
 #' @param data49 The 49 data data.frame.
+#' @examples
+#' \dontrun{
+#' data(raw4d_ex_data)
+#' clean_4d <- clean4DData(raw4d_ex_data,
+#' lower.TTree = 0,
+#' higher.TTree = 40,
+#' lower.TAir = -5,
+#' higher.TAir = 40)
+#' colnames(clean_4d)
+#' processed_49 <- string49Handling(raw4d_ex_data)
+#' colnames(processed_49)
+#' joined_data <- join4D49(clean_4d, processed_49)
+#' #joined data contains now both the 49 and 4D data, joined by id
+#' colnames(joined_data) 
+#' print(joined_data)
+#' }
 #' @export
 
 
