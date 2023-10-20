@@ -11,7 +11,7 @@
 #' @param lat Latitude at which is located the study site (in degrees).
 #' @param lon Longitude at which is located the study site (in degrees).
 #' 
-#' #' @examples
+#' @examples
 #' \dontrun{
 #' data(raw4d_ex_data)
 #' clean_data<- clean4DData(raw4d_ex_data,
