@@ -25,7 +25,7 @@ The default is "median".}
 
 \item{lon}{Longitude at which is located the study site (in degrees).
 
-#' @examples
+\examples{
 \dontrun{
 data(raw4d_ex_data)
 clean_data<- clean4DData(raw4d_ex_data,
@@ -46,6 +46,7 @@ statistic = "none",
 lat = 40, #when working with your data place correct values of latitude
 lon = 14) #and longitude of your study site
 }}
+}
 }
 \description{
 Plots the timeseries of TT+ data with nights shaded, by using
